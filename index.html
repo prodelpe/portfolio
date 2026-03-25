@@ -1,0 +1,2273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pau — Full Stack Developer</title>
+  <meta name="description" content="Full stack developer specializing in Laravel, PHP, and building useful web & mobile experiences.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Dela+Gothic+One&display=swap" rel="stylesheet">
+
+  <!-- SVG filter for paper grain texture -->
+  <svg style="position:absolute;width:0;height:0;" aria-hidden="true">
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feBlend in="SourceGraphic" mode="multiply"/>
+    </filter>
+  </svg>
+
+  <style>
+    /* ============================================
+       CSS CUSTOM PROPERTIES
+       Psychobilly / vintage 3D cinema palette
+       ============================================ */
+    :root {
+      --bg: #F0E9DA;
+      --bg-warm: #E8E0CE;
+      --bg-dark: #2A2118;
+      --text: #1A1510;
+      --text-muted: #5C5446;
+      --red: #D42B2B;
+      --red-hot: #FF2A2A;
+      --red-deep: #8B1A1A;
+      --red-faint: rgba(212, 43, 43, 0.1);
+      --green: #1B8C5A;
+      --green-bright: #00D47E;
+      --green-deep: #0E5C3A;
+      --green-faint: rgba(27, 140, 90, 0.1);
+      --cream: #F7F1E5;
+      --shadow-hard: rgba(26, 21, 16, 0.15);
+      --shadow-brutal: rgba(26, 21, 16, 0.25);
+      --font-sans: 'Space Grotesk', system-ui, sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-display: 'Dela Gothic One', 'Impact', sans-serif;
+      --section-gap: 150px;
+      --container: 1200px;
+      --radius: 6px;
+      --radius-sm: 4px;
+      /* Chromatic aberration offsets */
+      --chroma-x: 4px;
+      --chroma-y: 3px;
+    }
+
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Film grain overlay — currently disabled, swap back if wanted */
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ============================================
+       UTILITIES
+       ============================================ */
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .section-label {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 20px;
+      display: inline-block;
+      padding: 6px 14px;
+      border: 2px solid var(--red);
+      position: relative;
+    }
+
+    /* Stamped / offset label effect */
+    .section-label::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border: 2px solid var(--green);
+      opacity: 0.3;
+      transform: translate(3px, 3px);
+      pointer-events: none;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      /* Chromatic aberration on section titles */
+      text-shadow:
+        calc(var(--chroma-x) * 0.5) calc(var(--chroma-y) * 0.5) 0 rgba(212, 43, 43, 0.15),
+        calc(var(--chroma-x) * -0.5) calc(var(--chroma-y) * -0.5) 0 rgba(27, 140, 90, 0.12);
+    }
+
+    .section-title em {
+      font-style: normal;
+      color: var(--red);
+    }
+
+    /* ============================================
+       REVEAL ANIMATIONS — more dramatic
+       ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px) rotate(-1deg);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+
+    .stagger > .reveal:nth-child(2) { transition-delay: 0.12s; }
+    .stagger > .reveal:nth-child(3) { transition-delay: 0.24s; }
+    .stagger > .reveal:nth-child(4) { transition-delay: 0.36s; }
+    .stagger > .reveal:nth-child(5) { transition-delay: 0.48s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .floating-shape, .deco-shape { animation: none !important; }
+      .parallax-layer, .deco-fg { transform: none !important; }
+      .hero-hello, .hero-hello::before, .hero-hello::after { transition: none; }
+      body::after { display: none; }
+    }
+
+    /* ============================================
+       NAVIGATION
+       ============================================ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 0;
+      transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
+    }
+
+    .nav.scrolled {
+      background: rgba(240, 233, 218, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 2px 0 var(--shadow-hard);
+      padding: 14px 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 22px;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow:
+        2px 2px 0 var(--red),
+        -1px -1px 0 var(--green);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .nav-logo:hover {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      transition: color 0.3s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      display: inline-block;
+    }
+
+    .nav-links a:hover {
+      color: var(--red);
+      transform: scale(1.05);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: var(--red);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Language switcher — stamp style */
+    .lang-switcher {
+      display: flex;
+      gap: 2px;
+      background: var(--bg-warm);
+      border-radius: 4px;
+      padding: 3px;
+      border: 2px solid var(--text);
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 2px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .lang-btn.active {
+      background: var(--text);
+      color: var(--bg);
+      transform: scale(1.05);
+    }
+
+    .lang-btn:hover:not(.active) {
+      color: var(--text);
+      transform: scale(1.05);
+    }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      position: relative;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 3px;
+      background: var(--text);
+      position: absolute;
+      left: 4px;
+      transition: all 0.3s;
+    }
+
+    .menu-toggle span:nth-child(1) { top: 8px; }
+    .menu-toggle span:nth-child(2) { top: 15px; }
+    .menu-toggle span:nth-child(3) { top: 22px; }
+
+    .menu-toggle.open span:nth-child(1) { top: 15px; transform: rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { top: 15px; transform: rotate(-45deg); }
+
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 0 80px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* The big HELLO — iconic, loud, chromatic aberration
+       TWEAK: adjust --chroma-x / --chroma-y in :root to control offset intensity
+       TWEAK: adjust --hello-hover-spread to control hover aberration spread */
+    .hero-hello {
+      font-family: var(--font-display);
+      font-size: clamp(80px, 12vw, 160px);
+      font-weight: 400;
+      line-height: 0.9;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: -3px;
+      position: relative;
+      display: inline-block;
+      color: var(--text);
+      cursor: default;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Hover: subtle scale + perspective tilt */
+    .hero-hello:hover {
+      transform: scale(1.03) perspective(600px) rotateY(-2deg);
+    }
+
+    /* Strong chromatic aberration — red/green 3D offset */
+    .hero-hello::before {
+      content: attr(data-text);
+      position: absolute;
+      left: calc(var(--chroma-x) * -1.5);
+      top: calc(var(--chroma-y) * 1);
+      color: var(--red-hot);
+      opacity: 0.45;
+      z-index: -1;
+      pointer-events: none;
+      transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  top 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  opacity 0.5s ease;
+    }
+
+    .hero-hello::after {
+      content: attr(data-text);
+      position: absolute;
+      left: calc(var(--chroma-x) * 1.5);
+      top: calc(var(--chroma-y) * -1);
+      color: var(--green-bright);
+      opacity: 0.35;
+      z-index: -1;
+      pointer-events: none;
+      transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  top 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  opacity 0.5s ease;
+    }
+
+    /* Hover: spread the double vision further apart */
+    .hero-hello:hover::before {
+      left: calc(var(--chroma-x) * -3);
+      top: calc(var(--chroma-y) * 2);
+      opacity: 0.55;
+    }
+
+    .hero-hello:hover::after {
+      left: calc(var(--chroma-x) * 3);
+      top: calc(var(--chroma-y) * -2);
+      opacity: 0.45;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3.5vw, 42px);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 22px;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      color: var(--red);
+      position: relative;
+    }
+
+    /* Strike-through decoration on em */
+    .hero-headline em::after {
+      content: '';
+      position: absolute;
+      left: -4px;
+      right: -4px;
+      bottom: 2px;
+      height: 8px;
+      background: var(--green-faint);
+      z-index: -1;
+      transform: skewX(-6deg);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 460px;
+      border-left: 4px solid var(--red);
+      padding-left: 18px;
+    }
+
+    /* ============================================
+       HERO VISUAL — poster-style avatar
+       ============================================ */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+
+    /* Circle frame for avatar */
+    .avatar-frame {
+      width: 400px;
+      height: 400px;
+      background: var(--cream);
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      border: 4px solid var(--text);
+      transform: perspective(600px) rotateY(-6deg) rotateX(3deg) rotate(-2deg);
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Double-border vintage frame effect */
+    .avatar-frame::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 2px solid var(--text);
+      border-radius: 50%;
+      opacity: 0.3;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Red/green offset shadow on frame */
+    .avatar-frame::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: inherit;
+      box-shadow:
+        6px 6px 0 var(--red),
+        -4px -4px 0 var(--green);
+      opacity: 0.2;
+      z-index: -1;
+    }
+
+    .avatar-frame:hover {
+      transform: perspective(600px) rotateY(2deg) rotateX(-1deg) rotate(1deg) scale(1.03);
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: grayscale(1);
+      opacity: 0.8;
+    }
+
+    /* Pointillist dot overlay on avatar */
+    .avatar-dots {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.35;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADAQMAAABs5if8AAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjaGAAAgAChgCB/5LsuQAAAABJRU5ErkJggg==);
+    }
+
+    .avatar-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .avatar-placeholder svg {
+      opacity: 0.25;
+    }
+
+    /* ============================================
+       FLOATING DECORATIVE SHAPES
+       Retro horror / psychobilly inspired
+       ============================================ */
+    .floating-shape {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Lightning bolt */
+    .shape-lightning {
+      top: -20px;
+      right: -30px;
+      width: 50px;
+      height: 80px;
+      animation: float-jitter 4s ease-in-out infinite;
+    }
+
+    .shape-lightning svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Five-pointed star */
+    .shape-star {
+      bottom: 50px;
+      left: -40px;
+      width: 40px;
+      height: 40px;
+      animation: float-jitter 5s ease-in-out infinite reverse;
+    }
+
+    .shape-star svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Red ring — vintage target */
+    .shape-red-ring {
+      width: 100px;
+      height: 100px;
+      border: 4px solid var(--red);
+      border-radius: 50%;
+      opacity: 0.2;
+      top: 60px;
+      left: 10px;
+      animation: float-spin 12s linear infinite;
+    }
+
+    /* Green cross */
+    .shape-cross {
+      width: 30px;
+      height: 30px;
+      border-radius: 0;
+      opacity: 0.2;
+      bottom: 30px;
+      right: 40px;
+      animation: float-jitter 6s ease-in-out infinite 0.5s;
+    }
+
+    .shape-cross::before,
+    .shape-cross::after {
+      content: '';
+      position: absolute;
+      background: var(--green);
+    }
+
+    .shape-cross::before {
+      width: 30px;
+      height: 4px;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+
+    .shape-cross::after {
+      width: 4px;
+      height: 30px;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+    }
+
+    /* Eyeball shape */
+    .shape-eye {
+      top: -40px;
+      left: 50%;
+      width: 60px;
+      height: 34px;
+      animation: float-jitter 7s ease-in-out infinite 1s;
+    }
+
+    .shape-eye svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Small scattered dots */
+    .shape-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: float-jitter 5s ease-in-out infinite;
+    }
+
+    .shape-dot-red {
+      background: var(--red);
+      opacity: 0.35;
+      top: 40%;
+      right: -60px;
+    }
+
+    .shape-dot-green {
+      background: var(--green);
+      opacity: 0.3;
+      bottom: 40%;
+      left: -50px;
+      animation-delay: 2s;
+    }
+
+    @keyframes float-jitter {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-10px) rotate(3deg); }
+      50% { transform: translateY(-16px) rotate(-2deg); }
+      75% { transform: translateY(-6px) rotate(4deg); }
+    }
+
+    @keyframes float-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ============================================
+       HERO BACKGROUND PLANES — bold, angled
+       ============================================ */
+    .hero-bg-plane {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .hero-bg-plane-1 {
+      width: 500px;
+      height: 500px;
+      background: var(--red-faint);
+      right: -120px;
+      top: 5%;
+      transform: rotate(-18deg);
+      opacity: 0.6;
+      border: 3px solid rgba(212, 43, 43, 0.06);
+    }
+
+    .hero-bg-plane-2 {
+      width: 350px;
+      height: 350px;
+      background: var(--green-faint);
+      right: 12%;
+      bottom: 0;
+      transform: rotate(12deg);
+      opacity: 0.5;
+      border: 3px solid rgba(27, 140, 90, 0.06);
+    }
+
+    .hero-bg-plane-3 {
+      width: 250px;
+      height: 80px;
+      border: 3px solid var(--red);
+      opacity: 0.06;
+      left: 3%;
+      bottom: 12%;
+      transform: rotate(-8deg) skewX(-5deg);
+    }
+
+    /* Diagonal stripe accent across hero */
+    .hero-stripe {
+      position: absolute;
+      width: 200%;
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--red) 0,
+        var(--red) 10px,
+        transparent 10px,
+        transparent 20px
+      );
+      opacity: 0.08;
+      bottom: 40px;
+      left: -50%;
+      transform: rotate(-3deg);
+      pointer-events: none;
+    }
+
+    /* ============================================
+       WHAT I DO SECTION
+       ============================================ */
+    .what-i-do {
+      padding: var(--section-gap) 0;
+      position: relative;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+    /* Cards — poster / flyer feel */
+    .service-card {
+      background: var(--cream);
+      border: 3px solid var(--text);
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Slight random rotation on cards for poster-board feel */
+    .service-card:nth-child(1) { transform: rotate(-1deg); }
+    .service-card:nth-child(2) { transform: rotate(0.5deg); }
+    .service-card:nth-child(3) { transform: rotate(-0.5deg); }
+
+    .service-card:hover {
+      transform: rotate(0deg) translateY(-10px) scale(1.02) !important;
+      box-shadow:
+        8px 8px 0 var(--red),
+        -4px -4px 0 var(--green);
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    .service-card:nth-child(1) .service-icon { color: var(--red); }
+    .service-card:nth-child(2) .service-icon { color: var(--green); }
+    .service-card:nth-child(3) .service-icon { color: var(--red-deep); }
+
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* Top bar accent — chunky */
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+    }
+
+    .service-card:nth-child(1)::before { background: var(--red); }
+    .service-card:nth-child(2)::before { background: var(--green); }
+    .service-card:nth-child(3)::before { background: linear-gradient(90deg, var(--red), var(--green)); }
+
+    /* Corner decoration */
+    .service-card::after {
+      content: '///';
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      opacity: 0.1;
+    }
+
+    /* ============================================
+       ABOUT SECTION
+       ============================================ */
+    .about {
+      padding: var(--section-gap) 0;
+      position: relative;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .about-text p:first-of-type {
+      font-size: 19px;
+      color: var(--text);
+    }
+
+    .about-aside {
+      position: relative;
+    }
+
+    .about-quote {
+      font-family: var(--font-serif);
+      font-size: 30px;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--text);
+      position: relative;
+      padding-left: 28px;
+      /* Chromatic aberration on quote */
+      text-shadow:
+        2px 2px 0 rgba(212, 43, 43, 0.08),
+        -2px -2px 0 rgba(27, 140, 90, 0.06);
+    }
+
+    .about-quote::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: var(--red);
+    }
+
+    /* Green offset bar */
+    .about-quote::after {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 4px;
+      bottom: -4px;
+      width: 6px;
+      background: var(--green);
+      opacity: 0.3;
+    }
+
+    /* ============================================
+       PROJECTS SECTION
+       Cards like vinyl sleeves / collectible posters
+       ============================================ */
+    .projects {
+      padding: var(--section-gap) 0;
+      position: relative;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .project-card {
+      background: var(--cream);
+      border: 3px solid var(--text);
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Slight random rotation — pinned poster board */
+    .project-card:nth-child(1) { transform: rotate(0.8deg); }
+    .project-card:nth-child(2) { transform: rotate(-0.5deg); }
+    .project-card:nth-child(3) { transform: rotate(1deg); }
+
+    .project-card:hover {
+      transform: rotate(0deg) translateY(-14px) scale(1.03) !important;
+      box-shadow:
+        10px 10px 0 var(--red),
+        -6px -6px 0 var(--green);
+      z-index: 2;
+    }
+
+    .project-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 3px solid var(--text);
+    }
+
+    .project-thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0.4;
+    }
+
+    /* Diagonal hatching on thumbnails */
+    .project-thumb-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 8px,
+        var(--text) 8px,
+        var(--text) 9px
+      );
+    }
+
+    .project-card:nth-child(1) .project-thumb {
+      background: linear-gradient(135deg, rgba(212,43,43,0.08), var(--bg-warm));
+    }
+    .project-card:nth-child(2) .project-thumb {
+      background: linear-gradient(135deg, rgba(27,140,90,0.08), var(--bg-warm));
+    }
+    .project-card:nth-child(3) .project-thumb {
+      background: linear-gradient(135deg, rgba(212,43,43,0.06), rgba(27,140,90,0.06));
+    }
+
+    .project-info {
+      padding: 24px 24px 28px;
+    }
+
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.55;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--red);
+      transition: gap 0.3s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .project-link:hover {
+      gap: 12px;
+      transform: translateX(4px);
+    }
+
+    .project-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ============================================
+       STACK SECTION — sticker / badge style
+       ============================================ */
+    .stack {
+      padding: var(--section-gap) 0;
+      position: relative;
+    }
+
+    .stack-container {
+      margin-top: 48px;
+    }
+
+    .stack-group {
+      margin-bottom: 36px;
+    }
+
+    .stack-group-label {
+      font-family: var(--font-display);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .stack-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* Sticker effect pills */
+    .stack-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--cream);
+      border: 2px solid var(--text);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+      cursor: default;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Slight random rotation on pills */
+    .stack-pill:nth-child(odd) { transform: rotate(-1.5deg); }
+    .stack-pill:nth-child(even) { transform: rotate(1deg); }
+    .stack-pill:nth-child(3n) { transform: rotate(-2deg); }
+
+    .stack-pill:hover {
+      transform: rotate(0deg) translateY(-5px) scale(1.08) !important;
+      box-shadow: 5px 5px 0 var(--red), -3px -3px 0 var(--green);
+      z-index: 2;
+      background: white;
+    }
+
+    .stack-pill .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pill-dot.red { background: var(--red); }
+    .pill-dot.green { background: var(--green); }
+
+    /* ============================================
+       CONTACT SECTION
+       ============================================ */
+    .contact {
+      padding: var(--section-gap) 0 100px;
+      position: relative;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-top: 48px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-field label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .form-field input,
+    .form-field textarea {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      padding: 14px 16px;
+      border: 2px solid var(--text);
+      background: var(--cream);
+      color: var(--text);
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: var(--red);
+      box-shadow: 4px 4px 0 var(--red), -2px -2px 0 var(--green);
+    }
+
+    .form-field textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .form-submit {
+      font-family: var(--font-display);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 16px 36px;
+      background: var(--text);
+      color: var(--bg);
+      border: 3px solid var(--text);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      align-self: flex-start;
+      position: relative;
+    }
+
+    .form-submit:hover {
+      background: var(--red);
+      border-color: var(--red);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 6px 6px 0 var(--text);
+    }
+
+    .contact-social {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 8px;
+    }
+
+    .contact-social-intro {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--cream);
+      border: 2px solid var(--text);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .social-link:hover {
+      transform: translateX(8px) rotate(-1deg);
+      box-shadow: 5px 5px 0 var(--red);
+      background: white;
+    }
+
+    .social-link svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      color: var(--text);
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      padding: 40px 0;
+      border-top: 3px solid var(--text);
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+    }
+
+    /* ============================================
+       PARALLAX DECORATION LAYERS
+       ============================================ */
+    .parallax-layer {
+      position: absolute;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .deco-circle-large {
+      width: 500px;
+      height: 500px;
+      border: 4px solid var(--red);
+      border-radius: 50%;
+      opacity: 0.04;
+      right: -200px;
+      top: 700px;
+    }
+
+    .deco-circle-green {
+      width: 300px;
+      height: 300px;
+      border: 4px solid var(--green);
+      border-radius: 50%;
+      opacity: 0.05;
+      left: -120px;
+      top: 1600px;
+    }
+
+    .deco-rect {
+      width: 180px;
+      height: 180px;
+      border: 4px solid var(--red);
+      opacity: 0.03;
+      right: 60px;
+      top: 2400px;
+      transform: rotate(35deg);
+    }
+
+    /* Scattered zigzag line decoration */
+    .deco-zigzag {
+      width: 120px;
+      height: 40px;
+      opacity: 0.06;
+      left: 5%;
+      top: 2800px;
+    }
+
+    .deco-zigzag svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ============================================
+       MICRO-COPY TAGLINES — poster slogan style
+       ============================================ */
+    .tagline {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0.45;
+      margin-top: 14px;
+      display: block;
+      position: relative;
+    }
+
+    /* Thin decorative line before tagline */
+    .tagline::before {
+      content: '—';
+      margin-right: 8px;
+      color: var(--red);
+      opacity: 0.6;
+    }
+
+    /* ============================================
+       PROJECT CARD ENHANCEMENTS — tape strips & pins
+       ============================================ */
+
+    /* Tape strip on top-left corner */
+    .project-card .project-tape {
+      position: absolute;
+      top: -4px;
+      left: 16px;
+      width: 44px;
+      height: 18px;
+      background: rgba(240, 233, 218, 0.7);
+      border: 1px solid rgba(26, 21, 16, 0.15);
+      transform: rotate(-3deg);
+      z-index: 5;
+      pointer-events: none;
+      /* Tape translucency */
+      backdrop-filter: blur(1px);
+    }
+
+    .project-card:nth-child(2) .project-tape {
+      left: auto;
+      right: 20px;
+      transform: rotate(2deg);
+    }
+
+    .project-card:nth-child(3) .project-tape {
+      left: 24px;
+      transform: rotate(-5deg);
+    }
+
+    /* Pin dot on top-right */
+    .project-card .project-pin {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.4);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .project-card:nth-child(2) .project-pin {
+      right: auto;
+      left: 12px;
+      background: var(--green);
+    }
+
+    .project-card:nth-child(3) .project-pin {
+      background: var(--red);
+    }
+
+    /* Project card number badge — vinyl catalog style */
+    .project-card .project-number {
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      font-family: var(--font-display);
+      font-size: 42px;
+      line-height: 1;
+      color: var(--text);
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Enhanced hover: 3D tilt with perspective */
+    .project-card:hover {
+      transform: rotate(0deg) translateY(-14px) scale(1.03) perspective(800px) rotateX(2deg) !important;
+      box-shadow:
+        10px 10px 0 var(--red),
+        -6px -6px 0 var(--green),
+        0 20px 40px rgba(26, 21, 16, 0.12);
+      z-index: 2;
+    }
+
+    /* ============================================
+       SECTION DEPTH DIVIDERS — printed panel feel
+       ============================================ */
+    .section-divider-deco {
+      position: relative;
+      height: 40px;
+      margin: 0 auto;
+      max-width: var(--container);
+      padding: 0 32px;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .section-divider-deco::before {
+      content: '';
+      position: absolute;
+      left: 32px;
+      right: 32px;
+      top: 50%;
+      height: 2px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--text) 0,
+        var(--text) 4px,
+        transparent 4px,
+        transparent 12px
+      );
+      opacity: 0.06;
+    }
+
+    /* Small decorative star in divider center */
+    .section-divider-deco::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      transform: translate(-50%, -50%) rotate(45deg);
+      opacity: 0.15;
+    }
+
+    /* ============================================
+       ENHANCED PARALLAX — foreground decorative elements
+       ============================================ */
+    .deco-fg {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Scattered stars across the page */
+    .deco-star-scatter {
+      width: 20px;
+      height: 20px;
+    }
+
+    .deco-star-scatter svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .deco-star-1 { left: 8%; top: 900px; opacity: 0.08; }
+    .deco-star-2 { right: 6%; top: 1800px; opacity: 0.06; transform: rotate(15deg); }
+    .deco-star-3 { left: 12%; top: 3200px; opacity: 0.07; transform: rotate(-20deg); }
+
+    /* Diagonal dashed lines across sections */
+    .deco-diag-line {
+      width: 300px;
+      height: 2px;
+      opacity: 0.04;
+    }
+
+    .deco-diag-1 {
+      right: -40px;
+      top: 1100px;
+      background: var(--red);
+      transform: rotate(-25deg);
+    }
+
+    .deco-diag-2 {
+      left: -60px;
+      top: 2100px;
+      background: var(--green);
+      transform: rotate(20deg);
+    }
+
+    /* Foreground overlapping plane — gives depth between sections */
+    .deco-plane-fg {
+      width: 200px;
+      height: 200px;
+      border: 3px solid var(--red);
+      opacity: 0.03;
+    }
+
+    .deco-plane-fg-1 {
+      right: 3%;
+      top: 1400px;
+      transform: rotate(22deg);
+    }
+
+    .deco-plane-fg-2 {
+      left: 2%;
+      top: 2600px;
+      width: 150px;
+      height: 150px;
+      border-color: var(--green);
+      transform: rotate(-15deg);
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 1024px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+      }
+
+      .hero-sub {
+        margin: 0 auto;
+        border-left: none;
+        border-bottom: 4px solid var(--red);
+        padding-left: 0;
+        padding-bottom: 16px;
+      }
+
+      .hero-visual { order: -1; }
+
+      .avatar-frame {
+        width: 220px;
+        height: 220px;
+        transform: rotate(-2deg);
+      }
+
+      .services-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .service-card:nth-child(1),
+      .service-card:nth-child(2),
+      .service-card:nth-child(3),
+      .project-card:nth-child(1),
+      .project-card:nth-child(2),
+      .project-card:nth-child(3) {
+        transform: none;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      :root { --section-gap: 100px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .menu-toggle { display: block; }
+      .nav-right { gap: 14px; }
+
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(240, 233, 218, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 99;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+      }
+
+      .mobile-menu.open { display: flex; }
+
+      .mobile-menu a {
+        font-family: var(--font-display);
+        font-size: 28px;
+        text-transform: uppercase;
+        color: var(--text);
+        transition: color 0.3s, transform 0.3s;
+      }
+
+      .mobile-menu a:hover {
+        color: var(--red);
+        transform: scale(1.05) rotate(-2deg);
+      }
+
+      .hero { min-height: auto; padding: 120px 0 60px; }
+
+      :root {
+        --section-gap: 80px;
+        --chroma-x: 3px;
+        --chroma-y: 2px;
+      }
+
+      .about-quote { font-size: 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 20px; }
+    }
+
+    /* ============================================
+       LANGUAGE TRANSITION
+       ============================================ */
+    [data-i18n] {
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    .lang-switching [data-i18n] {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       BACKGROUND PARALLAX DECORATION
+       ========================================== -->
+  <div class="parallax-layer deco-circle-large" data-parallax="0.03"></div>
+  <div class="parallax-layer deco-circle-green" data-parallax="0.05"></div>
+  <div class="parallax-layer deco-rect" data-parallax="0.04"></div>
+  <div class="parallax-layer deco-zigzag" data-parallax="0.06">
+    <svg viewBox="0 0 120 40" fill="none" stroke="#D42B2B" stroke-width="3">
+      <polyline points="0,30 15,10 30,30 45,10 60,30 75,10 90,30 105,10 120,30"/>
+    </svg>
+  </div>
+
+  <!-- Foreground decorative elements — different parallax speeds for depth -->
+  <div class="deco-fg deco-star-scatter deco-star-1 parallax-layer" data-parallax="0.07">
+    <svg viewBox="0 0 40 40" fill="var(--red)"><polygon points="20,0 25,15 40,15 28,24 33,40 20,30 7,40 12,24 0,15 15,15"/></svg>
+  </div>
+  <div class="deco-fg deco-star-scatter deco-star-2 parallax-layer" data-parallax="0.08">
+    <svg viewBox="0 0 40 40" fill="var(--green)"><polygon points="20,0 25,15 40,15 28,24 33,40 20,30 7,40 12,24 0,15 15,15"/></svg>
+  </div>
+  <div class="deco-fg deco-star-scatter deco-star-3 parallax-layer" data-parallax="0.06">
+    <svg viewBox="0 0 40 40" fill="var(--red)"><polygon points="20,0 25,15 40,15 28,24 33,40 20,30 7,40 12,24 0,15 15,15"/></svg>
+  </div>
+  <div class="deco-fg deco-diag-line deco-diag-1 parallax-layer" data-parallax="0.03"></div>
+  <div class="deco-fg deco-diag-line deco-diag-2 parallax-layer" data-parallax="0.05"></div>
+  <div class="deco-fg deco-plane-fg deco-plane-fg-1 parallax-layer" data-parallax="0.04"></div>
+  <div class="deco-fg deco-plane-fg-2 parallax-layer" data-parallax="0.06"></div>
+
+  <!-- ==========================================
+       NAVIGATION
+       ========================================== -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">Pau</a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#what-i-do" data-i18n="nav_work">What I do</a></li>
+          <li><a href="#about" data-i18n="nav_about">About</a></li>
+          <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+          <li><a href="#stack" data-i18n="nav_stack">Stack</a></li>
+          <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+        <div class="lang-switcher" role="group" aria-label="Language switcher">
+          <button class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" data-lang="ca" aria-pressed="false">CA</button>
+          <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+        </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#what-i-do" data-i18n="nav_work">What I do</a>
+    <a href="#about" data-i18n="nav_about">About</a>
+    <a href="#projects" data-i18n="nav_projects">Projects</a>
+    <a href="#stack" data-i18n="nav_stack">Stack</a>
+    <a href="#contact" data-i18n="nav_contact">Contact</a>
+  </div>
+
+  <!-- ==========================================
+       HERO SECTION
+       ========================================== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-plane hero-bg-plane-1 parallax-layer" data-parallax="0.02"></div>
+    <div class="hero-bg-plane hero-bg-plane-2 parallax-layer" data-parallax="0.04"></div>
+    <div class="hero-bg-plane hero-bg-plane-3 parallax-layer" data-parallax="0.03"></div>
+    <div class="hero-stripe"></div>
+
+    <div class="container hero-inner">
+      <div class="hero-text stagger">
+        <h1 class="hero-hello reveal" data-text="Hello" data-i18n="hero_hello">Hello</h1>
+        <p class="hero-headline reveal" data-i18n="hero_headline">I build useful <em data-i18n="hero_headline_em">web experiences</em></p>
+        <p class="hero-sub reveal" data-i18n="hero_sub">Full stack developer crafting web and mobile products with a practical mindset. I turn ideas into tools people actually use.</p>
+        <span class="tagline reveal" data-i18n="tagline_hero">Backend brain. Garage soul.</span>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="avatar-frame">
+          <img src="avatar.jpg" alt="Pau" class="avatar-img">
+          <div class="avatar-dots"></div>
+        </div>
+
+        <!-- Floating shapes — psychobilly decorative elements -->
+
+        <!-- Lightning bolt -->
+        <div class="floating-shape shape-lightning">
+          <svg viewBox="0 0 40 70" fill="var(--red)" opacity="0.3">
+            <polygon points="24,0 8,30 18,30 10,70 38,25 26,25 38,0"/>
+          </svg>
+        </div>
+
+        <!-- Five-pointed star -->
+        <div class="floating-shape shape-star">
+          <svg viewBox="0 0 40 40" fill="var(--green)" opacity="0.25">
+            <polygon points="20,0 25,15 40,15 28,24 33,40 20,30 7,40 12,24 0,15 15,15"/>
+          </svg>
+        </div>
+
+        <!-- Vintage ring -->
+        <div class="floating-shape shape-red-ring"></div>
+
+        <!-- Green cross -->
+        <div class="floating-shape shape-cross"></div>
+
+        <!-- Eyeball shape — monster touch -->
+        <div class="floating-shape shape-eye">
+          <svg viewBox="0 0 60 34" fill="none">
+            <ellipse cx="30" cy="17" rx="28" ry="15" stroke="var(--red)" stroke-width="2.5" opacity="0.2"/>
+            <circle cx="30" cy="17" r="7" fill="var(--green)" opacity="0.15"/>
+            <circle cx="30" cy="17" r="3" fill="var(--text)" opacity="0.15"/>
+          </svg>
+        </div>
+
+        <!-- Scattered dots -->
+        <div class="floating-shape shape-dot shape-dot-red"></div>
+        <div class="floating-shape shape-dot shape-dot-green"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section depth divider -->
+  <div class="section-divider-deco"></div>
+
+  <!-- ==========================================
+       WHAT I DO SECTION
+       ========================================== -->
+  <section class="what-i-do" id="what-i-do">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label" data-i18n="wid_label">What I do</p>
+        <h2 class="section-title" data-i18n="wid_title">Building things that <em>work</em></h2>
+      </div>
+      <div class="services-grid stagger">
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3 data-i18n="wid_web_title">Web Apps</h3>
+          <p data-i18n="wid_web_desc">Full stack applications built with Laravel and modern front-end tools. From SaaS platforms to internal dashboards—whatever the product needs.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></svg>
+          </div>
+          <h3 data-i18n="wid_mobile_title">Mobile Apps</h3>
+          <p data-i18n="wid_mobile_desc">Cross-platform mobile experiences that feel native. Connected to robust backends, ready for real users from day one.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 3v18M3 12h18M8 8l-5 4 5 4M16 8l5 4-5 4"/></svg>
+          </div>
+          <h3 data-i18n="wid_admin_title">Admin Panels & Integrations</h3>
+          <p data-i18n="wid_admin_desc">Clean admin interfaces and third-party integrations. Payment systems, APIs, automations—the invisible work that makes products run.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider-deco"></div>
+
+  <!-- ==========================================
+       ABOUT SECTION
+       ========================================== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label" data-i18n="about_label">About</p>
+        <h2 class="section-title" data-i18n="about_title">The person behind the code</h2>
+      </div>
+      <div class="about-content">
+        <div class="about-text reveal">
+          <p data-i18n="about_p1">I'm a full stack developer who enjoys building products that are both useful and pleasant to use. I work across the entire stack—from database design to polished front-end interfaces.</p>
+          <p data-i18n="about_p2">Most of my work revolves around Laravel and PHP, but I'm comfortable moving between technologies when a project calls for it. What I care about most is clean execution and delivering tools that solve real problems.</p>
+          <p data-i18n="about_p3">I like working on projects where I can see the full picture—understanding the why behind what I'm building, not just the how.</p>
+        </div>
+        <div class="about-aside reveal">
+          <blockquote class="about-quote" data-i18n="about_quote">Good software feels obvious once it exists. Getting there is the interesting part.</blockquote>
+          <span class="tagline" style="margin-top:24px;" data-i18n="tagline_about">Full stack with sharp edges.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider-deco"></div>
+
+  <!-- ==========================================
+       PROJECTS SECTION
+       ========================================== -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label" data-i18n="proj_label">Selected Projects</p>
+        <h2 class="section-title" data-i18n="proj_title">Things I've built</h2>
+      </div>
+      <div class="projects-grid stagger">
+        <div class="project-card reveal">
+          <div class="project-tape"></div>
+          <div class="project-pin"></div>
+          <div class="project-number">01</div>
+          <div class="project-thumb">
+            <div class="project-thumb-placeholder">Screenshot</div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-name" data-i18n="proj_1_name">Project Alpha</h3>
+            <p class="project-desc" data-i18n="proj_1_desc">A SaaS platform for managing subscriptions and billing with Stripe integration.</p>
+            <a href="https://github.com/your-username" target="_blank" rel="noopener" class="project-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              <span data-i18n="proj_view_github">View on GitHub</span> →
+            </a>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-tape"></div>
+          <div class="project-pin"></div>
+          <div class="project-number">02</div>
+          <div class="project-thumb">
+            <div class="project-thumb-placeholder">Screenshot</div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-name" data-i18n="proj_2_name">Project Beta</h3>
+            <p class="project-desc" data-i18n="proj_2_desc">A mobile-first booking app with real-time availability and payment processing.</p>
+            <a href="https://github.com/your-username" target="_blank" rel="noopener" class="project-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              <span data-i18n="proj_view_github">View on GitHub</span> →
+            </a>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-tape"></div>
+          <div class="project-pin"></div>
+          <div class="project-number">03</div>
+          <div class="project-thumb">
+            <div class="project-thumb-placeholder">Screenshot</div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-name" data-i18n="proj_3_name">Project Gamma</h3>
+            <p class="project-desc" data-i18n="proj_3_desc">An internal admin panel built with Filament for managing logistics and inventory.</p>
+            <a href="https://github.com/your-username" target="_blank" rel="noopener" class="project-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              <span data-i18n="proj_view_github">View on GitHub</span> →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider-deco"></div>
+
+  <!-- ==========================================
+       STACK SECTION
+       ========================================== -->
+  <section class="stack" id="stack">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label" data-i18n="stack_label">Stack & Tools</p>
+        <h2 class="section-title" data-i18n="stack_title">What I work with</h2>
+      </div>
+      <div class="stack-container reveal">
+        <div class="stack-group">
+          <p class="stack-group-label" data-i18n="stack_backend">Backend</p>
+          <div class="stack-pills">
+            <span class="stack-pill"><span class="pill-dot red"></span>Laravel</span>
+            <span class="stack-pill"><span class="pill-dot red"></span>PHP</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>APIs</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>Stripe</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <p class="stack-group-label" data-i18n="stack_frontend">Frontend</p>
+          <div class="stack-pills">
+            <span class="stack-pill"><span class="pill-dot green"></span>Vue</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>Livewire</span>
+            <span class="stack-pill"><span class="pill-dot red"></span>Tailwind</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <p class="stack-group-label" data-i18n="stack_tools">Tools & Platforms</p>
+          <div class="stack-pills">
+            <span class="stack-pill"><span class="pill-dot red"></span>Filament</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>WordPress</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider-deco"></div>
+
+  <!-- ==========================================
+       CONTACT SECTION
+       ========================================== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label" data-i18n="contact_label">Contact</p>
+        <h2 class="section-title" data-i18n="contact_title">Let's talk</h2>
+        <span class="tagline" data-i18n="tagline_contact">Useful web apps, built with attitude.</span>
+      </div>
+      <div class="contact-grid">
+        <form class="contact-form reveal" id="contactForm" onsubmit="return false;">
+          <div class="form-field">
+            <label for="name" data-i18n="contact_name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-field">
+            <label for="email" data-i18n="contact_email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-field">
+            <label for="message" data-i18n="contact_message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="form-submit" data-i18n="contact_send">Send message</button>
+        </form>
+        <div class="contact-social reveal">
+          <p class="contact-social-intro" data-i18n="contact_social_intro">You can also find me on these platforms. I'm always happy to connect.</p>
+          <a href="https://linkedin.com/in/your-username" target="_blank" rel="noopener" class="social-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/your-username" target="_blank" rel="noopener" class="social-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://twitter.com/your-username" target="_blank" rel="noopener" class="social-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            X / Twitter
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <p data-i18n="footer_text">&copy; 2026 Pau. Built with care.</p>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT
+       ========================================== -->
+  <script>
+    /* ============================================
+       TRANSLATIONS
+       ============================================ */
+    const translations = {
+      en: {
+        nav_work: 'What I do',
+        nav_about: 'About',
+        nav_projects: 'Projects',
+        nav_stack: 'Stack',
+        nav_contact: 'Contact',
+        hero_hello: 'Hello',
+        hero_headline: 'I build useful <em>web experiences</em>',
+        hero_headline_em: 'web experiences',
+        hero_sub: 'Full stack developer crafting web and mobile products with a practical mindset. I turn ideas into tools people actually use.',
+        wid_label: 'What I do',
+        wid_title: 'Building things that <em>work</em>',
+        wid_web_title: 'Web Apps',
+        wid_web_desc: 'Full stack applications built with Laravel and modern front-end tools. From SaaS platforms to internal dashboards—whatever the product needs.',
+        wid_mobile_title: 'Mobile Apps',
+        wid_mobile_desc: 'Cross-platform mobile experiences that feel native. Connected to robust backends, ready for real users from day one.',
+        wid_admin_title: 'Admin Panels & Integrations',
+        wid_admin_desc: 'Clean admin interfaces and third-party integrations. Payment systems, APIs, automations—the invisible work that makes products run.',
+        about_label: 'About',
+        about_title: 'The person behind the code',
+        about_p1: 'I\'m a full stack developer who enjoys building products that are both useful and pleasant to use. I work across the entire stack—from database design to polished front-end interfaces.',
+        about_p2: 'Most of my work revolves around Laravel and PHP, but I\'m comfortable moving between technologies when a project calls for it. What I care about most is clean execution and delivering tools that solve real problems.',
+        about_p3: 'I like working on projects where I can see the full picture—understanding the why behind what I\'m building, not just the how.',
+        about_quote: 'Good software feels obvious once it exists. Getting there is the interesting part.',
+        proj_label: 'Selected Projects',
+        proj_title: 'Things I\'ve built',
+        proj_1_name: 'Project Alpha',
+        proj_1_desc: 'A SaaS platform for managing subscriptions and billing with Stripe integration.',
+        proj_2_name: 'Project Beta',
+        proj_2_desc: 'A mobile-first booking app with real-time availability and payment processing.',
+        proj_3_name: 'Project Gamma',
+        proj_3_desc: 'An internal admin panel built with Filament for managing logistics and inventory.',
+        proj_view_github: 'View on GitHub',
+        stack_label: 'Stack & Tools',
+        stack_title: 'What I work with',
+        stack_backend: 'Backend',
+        stack_frontend: 'Frontend',
+        stack_tools: 'Tools & Platforms',
+        contact_label: 'Contact',
+        contact_title: 'Let\'s talk',
+        contact_name: 'Name',
+        contact_email: 'Email',
+        contact_message: 'Message',
+        contact_send: 'Send message',
+        contact_social_intro: 'You can also find me on these platforms. I\'m always happy to connect.',
+        tagline_hero: 'Backend brain. Garage soul.',
+        tagline_about: 'Full stack with sharp edges.',
+        tagline_contact: 'Useful web apps, built with attitude.',
+        footer_text: '&copy; 2026 Pau. Built with care.'
+      },
+
+      ca: {
+        nav_work: 'Què faig',
+        nav_about: 'Sobre mi',
+        nav_projects: 'Projectes',
+        nav_stack: 'Stack',
+        nav_contact: 'Contacte',
+        hero_hello: 'Hola',
+        hero_headline: 'Construeixo <em>experiències web</em> útils',
+        hero_headline_em: 'experiències web',
+        hero_sub: 'Desenvolupador full stack que crea productes web i mòbils amb mentalitat pràctica. Transformo idees en eines que la gent realment fa servir.',
+        wid_label: 'Què faig',
+        wid_title: 'Construint coses que <em>funcionen</em>',
+        wid_web_title: 'Aplicacions Web',
+        wid_web_desc: 'Aplicacions full stack construïdes amb Laravel i eines front-end modernes. Des de plataformes SaaS fins a dashboards interns—el que el producte necessiti.',
+        wid_mobile_title: 'Apps Mòbils',
+        wid_mobile_desc: 'Experiències mòbils multiplataforma amb sensació nativa. Connectades a backends robustos, llestes per a usuaris reals des del primer dia.',
+        wid_admin_title: 'Panells d\'Admin & Integracions',
+        wid_admin_desc: 'Interfícies d\'administració netes i integracions amb tercers. Sistemes de pagament, APIs, automatitzacions—el treball invisible que fa funcionar els productes.',
+        about_label: 'Sobre mi',
+        about_title: 'La persona darrere el codi',
+        about_p1: 'Sóc un desenvolupador full stack que gaudeix construint productes útils i agradables de fer servir. Treballo a tot l\'stack—des del disseny de bases de dades fins a interfícies front-end polides.',
+        about_p2: 'La major part de la meva feina gira al voltant de Laravel i PHP, però em moc còmodament entre tecnologies quan un projecte ho demana. El que més m\'importa és l\'execució neta i crear eines que resolguin problemes reals.',
+        about_p3: 'M\'agrada treballar en projectes on puc veure la foto completa—entenent el perquè del que construeixo, no només el com.',
+        about_quote: 'El bon software sembla obvi un cop existeix. Arribar-hi és la part interessant.',
+        proj_label: 'Projectes Seleccionats',
+        proj_title: 'Coses que he construït',
+        proj_1_name: 'Projecte Alpha',
+        proj_1_desc: 'Una plataforma SaaS per gestionar subscripcions i facturació amb integració de Stripe.',
+        proj_2_name: 'Projecte Beta',
+        proj_2_desc: 'Una app de reserves mobile-first amb disponibilitat en temps real i processament de pagaments.',
+        proj_3_name: 'Projecte Gamma',
+        proj_3_desc: 'Un panell d\'administració intern construït amb Filament per gestionar logística i inventari.',
+        proj_view_github: 'Veure a GitHub',
+        stack_label: 'Stack i Eines',
+        stack_title: 'Amb què treballo',
+        stack_backend: 'Backend',
+        stack_frontend: 'Frontend',
+        stack_tools: 'Eines i Plataformes',
+        contact_label: 'Contacte',
+        contact_title: 'Parlem',
+        contact_name: 'Nom',
+        contact_email: 'Correu electrònic',
+        contact_message: 'Missatge',
+        contact_send: 'Enviar missatge',
+        contact_social_intro: 'També em pots trobar en aquestes plataformes. Sempre estic content de connectar.',
+        tagline_hero: 'Cervell de backend. Ànima de garatge.',
+        tagline_about: 'Full stack amb arestes.',
+        tagline_contact: 'Apps web útils, fetes amb actitud.',
+        footer_text: '&copy; 2026 Pau. Construït amb cura.'
+      },
+
+      es: {
+        nav_work: 'Qué hago',
+        nav_about: 'Sobre mí',
+        nav_projects: 'Proyectos',
+        nav_stack: 'Stack',
+        nav_contact: 'Contacto',
+        hero_hello: 'Hola',
+        hero_headline: 'Construyo <em>experiencias web</em> útiles',
+        hero_headline_em: 'experiencias web',
+        hero_sub: 'Desarrollador full stack que crea productos web y móviles con mentalidad práctica. Transformo ideas en herramientas que la gente realmente usa.',
+        wid_label: 'Qué hago',
+        wid_title: 'Construyendo cosas que <em>funcionan</em>',
+        wid_web_title: 'Aplicaciones Web',
+        wid_web_desc: 'Aplicaciones full stack construidas con Laravel y herramientas front-end modernas. Desde plataformas SaaS hasta dashboards internos—lo que el producto necesite.',
+        wid_mobile_title: 'Apps Móviles',
+        wid_mobile_desc: 'Experiencias móviles multiplataforma con sensación nativa. Conectadas a backends robustos, listas para usuarios reales desde el primer día.',
+        wid_admin_title: 'Paneles de Admin & Integraciones',
+        wid_admin_desc: 'Interfaces de administración limpias e integraciones con terceros. Sistemas de pago, APIs, automatizaciones—el trabajo invisible que hace funcionar los productos.',
+        about_label: 'Sobre mí',
+        about_title: 'La persona detrás del código',
+        about_p1: 'Soy un desarrollador full stack que disfruta construyendo productos útiles y agradables de usar. Trabajo en todo el stack—desde el diseño de bases de datos hasta interfaces front-end pulidas.',
+        about_p2: 'La mayor parte de mi trabajo gira en torno a Laravel y PHP, pero me muevo cómodamente entre tecnologías cuando un proyecto lo requiere. Lo que más me importa es la ejecución limpia y crear herramientas que resuelvan problemas reales.',
+        about_p3: 'Me gusta trabajar en proyectos donde puedo ver la foto completa—entendiendo el porqué de lo que construyo, no solo el cómo.',
+        about_quote: 'El buen software parece obvio una vez que existe. Llegar ahí es la parte interesante.',
+        proj_label: 'Proyectos Seleccionados',
+        proj_title: 'Cosas que he construido',
+        proj_1_name: 'Proyecto Alpha',
+        proj_1_desc: 'Una plataforma SaaS para gestionar suscripciones y facturación con integración de Stripe.',
+        proj_2_name: 'Proyecto Beta',
+        proj_2_desc: 'Una app de reservas mobile-first con disponibilidad en tiempo real y procesamiento de pagos.',
+        proj_3_name: 'Proyecto Gamma',
+        proj_3_desc: 'Un panel de administración interno construido con Filament para gestionar logística e inventario.',
+        proj_view_github: 'Ver en GitHub',
+        stack_label: 'Stack y Herramientas',
+        stack_title: 'Con qué trabajo',
+        stack_backend: 'Backend',
+        stack_frontend: 'Frontend',
+        stack_tools: 'Herramientas y Plataformas',
+        contact_label: 'Contacto',
+        contact_title: 'Hablemos',
+        contact_name: 'Nombre',
+        contact_email: 'Correo electrónico',
+        contact_message: 'Mensaje',
+        contact_send: 'Enviar mensaje',
+        contact_social_intro: 'También puedes encontrarme en estas plataformas. Siempre estoy encantado de conectar.',
+        tagline_hero: 'Cerebro de backend. Alma de garaje.',
+        tagline_about: 'Full stack con filo.',
+        tagline_contact: 'Apps web útiles, hechas con actitud.',
+        footer_text: '&copy; 2026 Pau. Construido con cuidado.'
+      }
+    };
+
+    /* ============================================
+       LANGUAGE SWITCHER
+       ============================================ */
+    let currentLang = 'en';
+
+    function setLanguage(lang) {
+      if (lang === currentLang) return;
+      currentLang = lang;
+
+      document.body.classList.add('lang-switching');
+
+      setTimeout(() => {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (translations[lang] && translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+          }
+        });
+
+        // Update anaglyph data-text
+        const heroHello = document.querySelector('.hero-hello');
+        if (heroHello && translations[lang].hero_hello) {
+          heroHello.setAttribute('data-text', translations[lang].hero_hello);
+        }
+
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          const isActive = btn.dataset.lang === lang;
+          btn.classList.toggle('active', isActive);
+          btn.setAttribute('aria-pressed', isActive);
+        });
+
+        document.body.classList.remove('lang-switching');
+      }, 150);
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    /* ============================================
+       SCROLL REVEAL — Intersection Observer
+       ============================================ */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    /* ============================================
+       PARALLAX ON SCROLL — multi-layer depth
+       Foreground elements (.deco-fg) also get slight
+       rotation for poster-layer-peel effect
+       ============================================ */
+    const parallaxLayers = document.querySelectorAll('[data-parallax]');
+    let ticking = false;
+
+    function updateParallax() {
+      const scrollY = window.scrollY;
+      parallaxLayers.forEach(layer => {
+        const speed = parseFloat(layer.getAttribute('data-parallax'));
+        const yOffset = scrollY * speed;
+        // Foreground elements get slight rotation proportional to scroll
+        if (layer.classList.contains('deco-fg')) {
+          const rot = Math.sin(scrollY * 0.001) * 3; // subtle ±3deg wobble
+          layer.style.transform = `translateY(${yOffset}px) rotate(${rot}deg)`;
+        } else {
+          layer.style.transform = `translateY(${yOffset}px)`;
+        }
+      });
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    /* ============================================
+       NAV SCROLL EFFECT
+       ============================================ */
+    const nav = document.getElementById('nav');
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* ============================================
+       MOBILE MENU
+       ============================================ */
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* ============================================
+       CONTACT FORM STUB
+       ============================================ */
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('.form-submit');
+      const originalText = btn.textContent;
+      btn.textContent = 'SENT';
+      btn.style.background = 'var(--green)';
+      btn.style.borderColor = 'var(--green)';
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        this.reset();
+      }, 2000);
+    });
+
+    /* ============================================
+       HERO ENTRANCE — staggered cinematic reveal
+       ============================================ */
+    window.addEventListener('load', () => {
+      const heroReveals = document.querySelectorAll('.hero .reveal');
+      heroReveals.forEach((el, i) => {
+        setTimeout(() => {
+          el.classList.add('visible');
+        }, 300 + i * 180);
+      });
+    });
+  </script>
+</body>
+</html>
