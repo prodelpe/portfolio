@@ -1669,13 +1669,14 @@
       :root { --section-gap: 100px; }
     }
 
+    .mobile-menu { display: none; }
+
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .menu-toggle { display: block; }
       .nav-right { gap: 14px; }
 
       .mobile-menu {
-        display: none;
         position: fixed;
         inset: 0;
         background: rgba(240, 233, 218, 0.97);
