@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pau — Full Stack Developer</title>
+  <title>Prodelpe — Full Stack Developer</title>
   <meta name="description" content="Full stack developer specializing in Laravel, PHP, and building useful web & mobile experiences.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1090,6 +1090,122 @@
     .pill-dot.green { background: var(--green); }
 
     /* ============================================
+       EXPERIENCE SECTION — punched-card timeline
+       ============================================ */
+    .experience {
+      padding: var(--section-gap) 0;
+      position: relative;
+    }
+
+    .timeline {
+      margin-top: 56px;
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 6px;
+      bottom: 6px;
+      width: 3px;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          var(--text) 0 8px,
+          transparent 8px 16px
+        );
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 36px;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -32px;
+      top: 18px;
+      width: 18px;
+      height: 18px;
+      background: var(--red);
+      border: 3px solid var(--text);
+      border-radius: 50%;
+      box-shadow: 2px 2px 0 var(--text);
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot { background: var(--green); }
+
+    .timeline-card {
+      background: var(--cream);
+      border: 3px solid var(--text);
+      padding: 22px 26px 24px;
+      box-shadow: 6px 6px 0 var(--shadow-brutal);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-card { transform: rotate(-0.4deg); }
+    .timeline-item:nth-child(even) .timeline-card { transform: rotate(0.5deg); }
+
+    .timeline-card:hover {
+      transform: rotate(0deg) translateY(-4px) !important;
+      box-shadow:
+        8px 8px 0 var(--red),
+        -4px -4px 0 var(--green);
+    }
+
+    .timeline-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px 18px;
+      margin-bottom: 4px;
+    }
+
+    .timeline-role {
+      font-family: var(--font-display);
+      font-size: 17px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      color: var(--red);
+    }
+
+    .timeline-dates {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .timeline-company {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .timeline-location {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .timeline-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ============================================
        CONTACT SECTION
        ============================================ */
     .contact {
@@ -1540,6 +1656,11 @@
         gap: 40px;
       }
 
+      .timeline-item:nth-child(odd) .timeline-card,
+      .timeline-item:nth-child(even) .timeline-card {
+        transform: none;
+      }
+
       .contact-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -1644,11 +1765,12 @@
        ========================================== -->
   <nav class="nav" id="nav">
     <div class="container nav-inner">
-      <a href="#" class="nav-logo">Pau</a>
+      <a href="#" class="nav-logo">Prodelpe</a>
       <div class="nav-right">
         <ul class="nav-links">
           <li><a href="#what-i-do" data-i18n="nav_work">What I do</a></li>
           <li><a href="#about" data-i18n="nav_about">About</a></li>
+          <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
           <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
           <li><a href="#stack" data-i18n="nav_stack">Stack</a></li>
           <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
@@ -1669,6 +1791,7 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#what-i-do" data-i18n="nav_work">What I do</a>
     <a href="#about" data-i18n="nav_about">About</a>
+    <a href="#experience" data-i18n="nav_experience">Experience</a>
     <a href="#projects" data-i18n="nav_projects">Projects</a>
     <a href="#stack" data-i18n="nav_stack">Stack</a>
     <a href="#contact" data-i18n="nav_contact">Contact</a>
@@ -1692,7 +1815,7 @@
       </div>
       <div class="hero-visual reveal">
         <div class="avatar-frame">
-          <img src="avatar.jpg" alt="Pau" class="avatar-img">
+          <img src="avatar.jpg" alt="Prodelpe" class="avatar-img">
           <div class="avatar-dots"></div>
         </div>
 
@@ -1800,6 +1923,70 @@
   <div class="section-divider-deco"></div>
 
   <!-- ==========================================
+       EXPERIENCE SECTION
+       ========================================== -->
+  <section class="experience" id="experience">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label" data-i18n="exp_label">Experience</p>
+        <h2 class="section-title" data-i18n="exp_title">Where I've been</h2>
+      </div>
+      <div class="timeline stagger">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-head">
+              <h3 class="timeline-role" data-i18n="exp_1_role">PHP Full Stack Developer</h3>
+              <span class="timeline-dates" data-i18n="exp_1_dates">Aug 2020 — Present</span>
+            </div>
+            <p class="timeline-company" data-i18n="exp_1_company">Creagia</p>
+            <p class="timeline-location" data-i18n="exp_1_location">Igualada, Catalonia</p>
+            <p class="timeline-desc" data-i18n="exp_1_desc">Building web applications from scratch with PHP and Laravel. Daily work with Filament, Livewire, Alpine.js, Vue.js, payment integration with Stripe, search engines like Meilisearch, and AI tools.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-head">
+              <h3 class="timeline-role" data-i18n="exp_2_role">Web Developer</h3>
+              <span class="timeline-dates" data-i18n="exp_2_dates">Nov 2017 — Aug 2020</span>
+            </div>
+            <p class="timeline-company" data-i18n="exp_2_company">Instint Estratègies Digitals</p>
+            <p class="timeline-location" data-i18n="exp_2_location">Igualada, Catalonia</p>
+            <p class="timeline-desc" data-i18n="exp_2_desc">Development of themes and plugins for WordPress and Prestashop. Front-end development with CSS and Bootstrap. Content management for corporate and e-commerce websites.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-head">
+              <h3 class="timeline-role" data-i18n="exp_3_role">Web Designer</h3>
+              <span class="timeline-dates" data-i18n="exp_3_dates">Oct 2014 — Mar 2015</span>
+            </div>
+            <p class="timeline-company" data-i18n="exp_3_company">Advisor Websites</p>
+            <p class="timeline-location" data-i18n="exp_3_location">Vancouver, Canada</p>
+            <p class="timeline-desc" data-i18n="exp_3_desc">Custom web layouts with LESS, CSS and jQuery.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-head">
+              <h3 class="timeline-role" data-i18n="exp_4_role">Web Developer (Internship)</h3>
+              <span class="timeline-dates" data-i18n="exp_4_dates">Jul 2014</span>
+            </div>
+            <p class="timeline-company" data-i18n="exp_4_company">Creagia</p>
+            <p class="timeline-location" data-i18n="exp_4_location">Igualada, Catalonia</p>
+            <p class="timeline-desc" data-i18n="exp_4_desc">Development of a PHP and MySQL application using the CodeIgniter framework.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider-deco"></div>
+
+  <!-- ==========================================
        PROJECTS SECTION
        ========================================== -->
   <section class="projects" id="projects">
@@ -1876,25 +2063,34 @@
         <div class="stack-group">
           <p class="stack-group-label" data-i18n="stack_backend">Backend</p>
           <div class="stack-pills">
+            <span class="stack-pill"><span class="pill-dot red"></span>PHP 8</span>
             <span class="stack-pill"><span class="pill-dot red"></span>Laravel</span>
-            <span class="stack-pill"><span class="pill-dot red"></span>PHP</span>
-            <span class="stack-pill"><span class="pill-dot green"></span>APIs</span>
-            <span class="stack-pill"><span class="pill-dot green"></span>Stripe</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>MySQL</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>REST APIs</span>
+            <span class="stack-pill"><span class="pill-dot red"></span>Stripe</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>Meilisearch</span>
+            <span class="stack-pill"><span class="pill-dot red"></span>Pinecone</span>
           </div>
         </div>
         <div class="stack-group">
           <p class="stack-group-label" data-i18n="stack_frontend">Frontend</p>
           <div class="stack-pills">
-            <span class="stack-pill"><span class="pill-dot green"></span>Vue</span>
             <span class="stack-pill"><span class="pill-dot green"></span>Livewire</span>
-            <span class="stack-pill"><span class="pill-dot red"></span>Tailwind</span>
+            <span class="stack-pill"><span class="pill-dot red"></span>Alpine.js</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>Vue.js</span>
+            <span class="stack-pill"><span class="pill-dot red"></span>Tailwind CSS</span>
           </div>
         </div>
         <div class="stack-group">
           <p class="stack-group-label" data-i18n="stack_tools">Tools & Platforms</p>
           <div class="stack-pills">
             <span class="stack-pill"><span class="pill-dot red"></span>Filament</span>
-            <span class="stack-pill"><span class="pill-dot green"></span>WordPress</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>Git</span>
+            <span class="stack-pill"><span class="pill-dot red"></span>Docker</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>Vite</span>
+            <span class="stack-pill"><span class="pill-dot red"></span>npm</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>PHPUnit</span>
+            <span class="stack-pill"><span class="pill-dot red"></span>AI / LLMs</span>
           </div>
         </div>
       </div>
@@ -1953,7 +2149,7 @@
        ========================================== -->
   <footer class="footer">
     <div class="container">
-      <p data-i18n="footer_text">&copy; 2026 Pau. Built with care.</p>
+      <p data-i18n="footer_text">&copy; 2026 Prodelpe. Built with care.</p>
     </div>
   </footer>
 
@@ -1968,6 +2164,7 @@
       en: {
         nav_work: 'What I do',
         nav_about: 'About',
+        nav_experience: 'Experience',
         nav_projects: 'Projects',
         nav_stack: 'Stack',
         nav_contact: 'Contact',
@@ -1985,10 +2182,32 @@
         wid_admin_desc: 'Clean admin interfaces and third-party integrations. Payment systems, APIs, automations—the invisible work that makes products run.',
         about_label: 'About',
         about_title: 'The person behind the code',
-        about_p1: 'I\'m a full stack developer who enjoys building products that are both useful and pleasant to use. I work across the entire stack—from database design to polished front-end interfaces.',
-        about_p2: 'Most of my work revolves around Laravel and PHP, but I\'m comfortable moving between technologies when a project calls for it. What I care about most is clean execution and delivering tools that solve real problems.',
+        about_p1: 'I\'m a full stack developer with over 8 years of experience building robust, scalable web applications. I work across the entire stack—from database design to polished front-end interfaces.',
+        about_p2: 'My daily toolkit lives around the TALL stack (Tailwind, Alpine, Livewire, Laravel) and tools like Filament, Vue.js, Stripe and Meilisearch. I actively integrate AI and automation into my workflow to ship smarter, more efficient solutions.',
         about_p3: 'I like working on projects where I can see the full picture—understanding the why behind what I\'m building, not just the how.',
         about_quote: 'Good software feels obvious once it exists. Getting there is the interesting part.',
+        exp_label: 'Experience',
+        exp_title: 'Where I\'ve been',
+        exp_1_role: 'PHP Full Stack Developer',
+        exp_1_dates: 'Aug 2020 — Present',
+        exp_1_company: 'Creagia',
+        exp_1_location: 'Igualada, Catalonia',
+        exp_1_desc: 'Building web applications from scratch with PHP and Laravel. Daily work with Filament, Livewire, Alpine.js, Vue.js, payment integration with Stripe, search engines like Meilisearch, and AI tools.',
+        exp_2_role: 'Web Developer',
+        exp_2_dates: 'Nov 2017 — Aug 2020',
+        exp_2_company: 'Instint Estratègies Digitals',
+        exp_2_location: 'Igualada, Catalonia',
+        exp_2_desc: 'Development of themes and plugins for WordPress and Prestashop. Front-end development with CSS and Bootstrap. Content management for corporate and e-commerce websites.',
+        exp_3_role: 'Web Designer',
+        exp_3_dates: 'Oct 2014 — Mar 2015',
+        exp_3_company: 'Advisor Websites',
+        exp_3_location: 'Vancouver, Canada',
+        exp_3_desc: 'Custom web layouts with LESS, CSS and jQuery.',
+        exp_4_role: 'Web Developer (Internship)',
+        exp_4_dates: 'Jul 2014',
+        exp_4_company: 'Creagia',
+        exp_4_location: 'Igualada, Catalonia',
+        exp_4_desc: 'Development of a PHP and MySQL application using the CodeIgniter framework.',
         proj_label: 'Selected Projects',
         proj_title: 'Things I\'ve built',
         proj_1_name: 'Project Alpha',
@@ -2013,21 +2232,22 @@
         tagline_hero: 'Backend brain. Garage soul.',
         tagline_about: 'Full stack with sharp edges.',
         tagline_contact: 'Useful web apps, built with attitude.',
-        footer_text: '&copy; 2026 Pau. Built with care.'
+        footer_text: '&copy; 2026 Prodelpe. Built with care.'
       },
 
       ca: {
         nav_work: 'Què faig',
         nav_about: 'Sobre mi',
+        nav_experience: 'Experiència',
         nav_projects: 'Projectes',
         nav_stack: 'Stack',
         nav_contact: 'Contacte',
         hero_hello: 'Hola',
         hero_headline: 'Construeixo <em>experiències web</em> útils',
         hero_headline_em: 'experiències web',
-        hero_sub: 'Desenvolupador full stack que crea productes web i mòbils amb mentalitat pràctica. Transformo idees en eines que la gent realment fa servir.',
+        hero_sub: 'Soc un desenvolupador full stack que crea productes web i mòbils amb mentalitat pràctica. Transformo idees en eines que la gent realment fa servir.',
         wid_label: 'Què faig',
-        wid_title: 'Construint coses que <em>funcionen</em>',
+        wid_title: 'Construeixo coses que <em>funcionen</em>',
         wid_web_title: 'Aplicacions Web',
         wid_web_desc: 'Aplicacions full stack construïdes amb Laravel i eines front-end modernes. Des de plataformes SaaS fins a dashboards interns—el que el producte necessiti.',
         wid_mobile_title: 'Apps Mòbils',
@@ -2036,10 +2256,32 @@
         wid_admin_desc: 'Interfícies d\'administració netes i integracions amb tercers. Sistemes de pagament, APIs, automatitzacions—el treball invisible que fa funcionar els productes.',
         about_label: 'Sobre mi',
         about_title: 'La persona darrere el codi',
-        about_p1: 'Sóc un desenvolupador full stack que gaudeix construint productes útils i agradables de fer servir. Treballo a tot l\'stack—des del disseny de bases de dades fins a interfícies front-end polides.',
-        about_p2: 'La major part de la meva feina gira al voltant de Laravel i PHP, però em moc còmodament entre tecnologies quan un projecte ho demana. El que més m\'importa és l\'execució neta i crear eines que resolguin problemes reals.',
+        about_p1: 'Soc un desenvolupador full stack amb més de 8 anys d\'experiència construint aplicacions web robustes i escalables. Treballo a tot l\'stack—des del disseny de bases de dades fins a interfícies front-end polides.',
+        about_p2: 'El meu dia a dia gira al voltant del TALL stack (Tailwind, Alpine, Livewire, Laravel) i eines com Filament, Vue.js, Stripe i Meilisearch. Integro IA i automatització als meus fluxos de treball per oferir solucions més intel·ligents i eficients.',
         about_p3: 'M\'agrada treballar en projectes on puc veure la foto completa—entenent el perquè del que construeixo, no només el com.',
         about_quote: 'El bon software sembla obvi un cop existeix. Arribar-hi és la part interessant.',
+        exp_label: 'Experiència',
+        exp_title: 'On he treballat',
+        exp_1_role: 'Desenvolupador Full Stack PHP',
+        exp_1_dates: 'Ago 2020 — Actualitat',
+        exp_1_company: 'Creagia',
+        exp_1_location: 'Igualada, Catalunya',
+        exp_1_desc: 'Construcció d\'aplicacions web des de zero amb PHP i Laravel. Feina diària amb Filament, Livewire, Alpine.js, Vue.js, integració de pagaments amb Stripe, motors de cerca com Meilisearch i eines d\'IA.',
+        exp_2_role: 'Desenvolupador Web',
+        exp_2_dates: 'Nov 2017 — Ago 2020',
+        exp_2_company: 'Instint Estratègies Digitals',
+        exp_2_location: 'Igualada, Catalunya',
+        exp_2_desc: 'Desenvolupament de temes i plugins per a WordPress i Prestashop. Front-end amb CSS i Bootstrap. Gestió de continguts per a webs corporatives i de comerç electrònic.',
+        exp_3_role: 'Dissenyador Web',
+        exp_3_dates: 'Oct 2014 — Mar 2015',
+        exp_3_company: 'Advisor Websites',
+        exp_3_location: 'Vancouver, Canadà',
+        exp_3_desc: 'Maquetacions web a mida amb LESS, CSS i jQuery.',
+        exp_4_role: 'Desenvolupador Web (Pràctiques)',
+        exp_4_dates: 'Jul 2014',
+        exp_4_company: 'Creagia',
+        exp_4_location: 'Igualada, Catalunya',
+        exp_4_desc: 'Desenvolupament d\'una aplicació PHP i MySQL amb el framework CodeIgniter.',
         proj_label: 'Projectes Seleccionats',
         proj_title: 'Coses que he construït',
         proj_1_name: 'Projecte Alpha',
@@ -2064,12 +2306,13 @@
         tagline_hero: 'Cervell de backend. Ànima de garatge.',
         tagline_about: 'Full stack amb arestes.',
         tagline_contact: 'Apps web útils, fetes amb actitud.',
-        footer_text: '&copy; 2026 Pau. Construït amb cura.'
+        footer_text: '&copy; 2026 Prodelpe. Construït amb cura.'
       },
 
       es: {
         nav_work: 'Qué hago',
         nav_about: 'Sobre mí',
+        nav_experience: 'Experiencia',
         nav_projects: 'Proyectos',
         nav_stack: 'Stack',
         nav_contact: 'Contacto',
@@ -2087,10 +2330,32 @@
         wid_admin_desc: 'Interfaces de administración limpias e integraciones con terceros. Sistemas de pago, APIs, automatizaciones—el trabajo invisible que hace funcionar los productos.',
         about_label: 'Sobre mí',
         about_title: 'La persona detrás del código',
-        about_p1: 'Soy un desarrollador full stack que disfruta construyendo productos útiles y agradables de usar. Trabajo en todo el stack—desde el diseño de bases de datos hasta interfaces front-end pulidas.',
-        about_p2: 'La mayor parte de mi trabajo gira en torno a Laravel y PHP, pero me muevo cómodamente entre tecnologías cuando un proyecto lo requiere. Lo que más me importa es la ejecución limpia y crear herramientas que resuelvan problemas reales.',
+        about_p1: 'Soy un desarrollador full stack con más de 8 años de experiencia construyendo aplicaciones web robustas y escalables. Trabajo en todo el stack—desde el diseño de bases de datos hasta interfaces front-end pulidas.',
+        about_p2: 'Mi día a día gira en torno al TALL stack (Tailwind, Alpine, Livewire, Laravel) y herramientas como Filament, Vue.js, Stripe y Meilisearch. Integro IA y automatización en mis flujos de trabajo para entregar soluciones más inteligentes y eficientes.',
         about_p3: 'Me gusta trabajar en proyectos donde puedo ver la foto completa—entendiendo el porqué de lo que construyo, no solo el cómo.',
         about_quote: 'El buen software parece obvio una vez que existe. Llegar ahí es la parte interesante.',
+        exp_label: 'Experiencia',
+        exp_title: 'Dónde he estado',
+        exp_1_role: 'Desarrollador Full Stack PHP',
+        exp_1_dates: 'Ago 2020 — Actualidad',
+        exp_1_company: 'Creagia',
+        exp_1_location: 'Igualada, Cataluña',
+        exp_1_desc: 'Construcción de aplicaciones web desde cero con PHP y Laravel. Trabajo diario con Filament, Livewire, Alpine.js, Vue.js, integración de pagos con Stripe, motores de búsqueda como Meilisearch y herramientas de IA.',
+        exp_2_role: 'Desarrollador Web',
+        exp_2_dates: 'Nov 2017 — Ago 2020',
+        exp_2_company: 'Instint Estratègies Digitals',
+        exp_2_location: 'Igualada, Cataluña',
+        exp_2_desc: 'Desarrollo de temas y plugins para WordPress y Prestashop. Front-end con CSS y Bootstrap. Gestión de contenidos para webs corporativas y de comercio electrónico.',
+        exp_3_role: 'Diseñador Web',
+        exp_3_dates: 'Oct 2014 — Mar 2015',
+        exp_3_company: 'Advisor Websites',
+        exp_3_location: 'Vancouver, Canadá',
+        exp_3_desc: 'Maquetaciones web a medida con LESS, CSS y jQuery.',
+        exp_4_role: 'Desarrollador Web (Prácticas)',
+        exp_4_dates: 'Jul 2014',
+        exp_4_company: 'Creagia',
+        exp_4_location: 'Igualada, Cataluña',
+        exp_4_desc: 'Desarrollo de una aplicación PHP y MySQL con el framework CodeIgniter.',
         proj_label: 'Proyectos Seleccionados',
         proj_title: 'Cosas que he construido',
         proj_1_name: 'Proyecto Alpha',
@@ -2115,7 +2380,7 @@
         tagline_hero: 'Cerebro de backend. Alma de garaje.',
         tagline_about: 'Full stack con filo.',
         tagline_contact: 'Apps web útiles, hechas con actitud.',
-        footer_text: '&copy; 2026 Pau. Construido con cuidado.'
+        footer_text: '&copy; 2026 Prodelpe. Construido con cuidado.'
       }
     };
 
