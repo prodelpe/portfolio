@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prodelpe — Full Stack Developer</title>
+  <title>prodelpe.com — Full Stack Developer</title>
   <meta name="description" content="Full stack developer specializing in Laravel, PHP, and building useful web & mobile experiences.">
+  <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Dela+Gothic+One&display=swap" rel="stylesheet">
@@ -165,7 +166,6 @@
       .reveal { opacity: 1; transform: none; transition: none; }
       .floating-shape, .deco-shape { animation: none !important; }
       .parallax-layer, .deco-fg { transform: none !important; }
-      .hero-hello, .hero-hello::before, .hero-hello::after { transition: none; }
       body::after { display: none; }
     }
 
@@ -345,76 +345,12 @@
       z-index: 2;
     }
 
-    /* The big HELLO — iconic, loud, chromatic aberration
-       TWEAK: adjust --chroma-x / --chroma-y in :root to control offset intensity
-       TWEAK: adjust --hello-hover-spread to control hover aberration spread */
-    .hero-hello {
-      font-family: var(--font-display);
-      font-size: clamp(80px, 12vw, 160px);
-      font-weight: 400;
-      line-height: 0.9;
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: -3px;
-      position: relative;
-      display: inline-block;
-      color: var(--text);
-      cursor: default;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    /* Hover: subtle scale + perspective tilt */
-    .hero-hello:hover {
-      transform: scale(1.03) perspective(600px) rotateY(-2deg);
-    }
-
-    /* Strong chromatic aberration — red/green 3D offset */
-    .hero-hello::before {
-      content: attr(data-text);
-      position: absolute;
-      left: calc(var(--chroma-x) * -1.5);
-      top: calc(var(--chroma-y) * 1);
-      color: var(--red-hot);
-      opacity: 0.45;
-      z-index: -1;
-      pointer-events: none;
-      transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  top 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  opacity 0.5s ease;
-    }
-
-    .hero-hello::after {
-      content: attr(data-text);
-      position: absolute;
-      left: calc(var(--chroma-x) * 1.5);
-      top: calc(var(--chroma-y) * -1);
-      color: var(--green-bright);
-      opacity: 0.35;
-      z-index: -1;
-      pointer-events: none;
-      transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  top 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  opacity 0.5s ease;
-    }
-
-    /* Hover: spread the double vision further apart */
-    .hero-hello:hover::before {
-      left: calc(var(--chroma-x) * -3);
-      top: calc(var(--chroma-y) * 2);
-      opacity: 0.55;
-    }
-
-    .hero-hello:hover::after {
-      left: calc(var(--chroma-x) * 3);
-      top: calc(var(--chroma-y) * -2);
-      opacity: 0.45;
-    }
-
     .hero-headline {
       font-family: var(--font-display);
-      font-size: clamp(24px, 3.5vw, 42px);
+      font-size: clamp(44px, 7vw, 88px);
       font-weight: 400;
-      line-height: 1.15;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
       margin-bottom: 22px;
       color: var(--text);
       text-transform: uppercase;
@@ -1766,7 +1702,7 @@
        ========================================== -->
   <nav class="nav" id="nav">
     <div class="container nav-inner">
-      <a href="#" class="nav-logo">Prodelpe</a>
+      <a href="#" class="nav-logo">prodelpe.com</a>
       <div class="nav-right">
         <ul class="nav-links">
           <li><a href="#what-i-do" data-i18n="nav_work">What I do</a></li>
@@ -1809,10 +1745,9 @@
 
     <div class="container hero-inner">
       <div class="hero-text stagger">
-        <h1 class="hero-hello reveal" data-text="Hello" data-i18n="hero_hello">Hello</h1>
-        <p class="hero-headline reveal" data-i18n="hero_headline">I build useful <em data-i18n="hero_headline_em">web experiences</em></p>
-        <p class="hero-sub reveal" data-i18n="hero_sub">Full stack developer crafting web and mobile products with a practical mindset. I turn ideas into tools people actually use.</p>
-        <span class="tagline reveal" data-i18n="tagline_hero">Backend brain. Garage soul.</span>
+        <h1 class="hero-headline reveal" data-i18n="hero_headline">I build useful <em data-i18n="hero_headline_em">experiences</em>.</h1>
+        <p class="hero-sub reveal" data-i18n="hero_sub">I'm Pau. Full stack developer crafting web and mobile products with a practical mindset. I turn ideas into tools people actually use.</p>
+        <span class="tagline reveal" data-i18n="tagline_hero">Understand the why. Build the how.</span>
       </div>
       <div class="hero-visual reveal">
         <div class="avatar-frame">
@@ -2130,17 +2065,13 @@
         </form>
         <div class="contact-social reveal">
           <p class="contact-social-intro" data-i18n="contact_social_intro">You can also find me on these platforms. I'm always happy to connect.</p>
-          <a href="https://linkedin.com/in/your-username" target="_blank" rel="noopener" class="social-link">
+          <a href="https://www.linkedin.com/in/pau-rodellino/" target="_blank" rel="noopener" class="social-link">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             LinkedIn
           </a>
-          <a href="https://github.com/your-username" target="_blank" rel="noopener" class="social-link">
+          <a href="https://github.com/prodelpe" target="_blank" rel="noopener" class="social-link">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
             GitHub
-          </a>
-          <a href="https://twitter.com/your-username" target="_blank" rel="noopener" class="social-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            X / Twitter
           </a>
         </div>
       </div>
@@ -2152,7 +2083,7 @@
        ========================================== -->
   <footer class="footer">
     <div class="container">
-      <p data-i18n="footer_text">&copy; 2026 Prodelpe. Built with care.</p>
+      <p data-i18n="footer_text">&copy; 2026 prodelpe.com</p>
     </div>
   </footer>
 
@@ -2171,10 +2102,9 @@
         nav_projects: 'Projects',
         nav_stack: 'Stack',
         nav_contact: 'Contact',
-        hero_hello: 'Hello',
-        hero_headline: 'I build useful <em>web experiences</em>',
-        hero_headline_em: 'web experiences',
-        hero_sub: 'Full stack developer crafting web and mobile products with a practical mindset. I turn ideas into tools people actually use.',
+        hero_headline: 'I build useful <em>experiences</em>.',
+        hero_headline_em: 'experiences',
+        hero_sub: 'I\'m Pau. Full stack developer crafting web and mobile products with a practical mindset. I turn ideas into tools people actually use.',
         wid_label: 'What I do',
         wid_title: 'Building things that <em>work</em>',
         wid_web_title: 'Web Apps',
@@ -2232,10 +2162,10 @@
         contact_message: 'Message',
         contact_send: 'Send message',
         contact_social_intro: 'You can also find me on these platforms. I\'m always happy to connect.',
-        tagline_hero: 'Backend brain. Garage soul.',
+        tagline_hero: 'Understand the why. Build the how.',
         tagline_about: 'Full stack with sharp edges.',
         tagline_contact: 'Useful web apps, built with attitude.',
-        footer_text: '&copy; 2026 Prodelpe. Built with care.'
+        footer_text: '&copy; 2026 prodelpe.com'
       },
 
       ca: {
@@ -2245,10 +2175,9 @@
         nav_projects: 'Projectes',
         nav_stack: 'Stack',
         nav_contact: 'Contacte',
-        hero_hello: 'Hola',
-        hero_headline: 'Construeixo <em>experiències web</em> útils',
-        hero_headline_em: 'experiències web',
-        hero_sub: 'Soc un desenvolupador full stack que crea productes web i mòbils amb mentalitat pràctica. Transformo idees en eines que la gent realment fa servir.',
+        hero_headline: 'Construeixo <em>experiències</em> útils.',
+        hero_headline_em: 'experiències',
+        hero_sub: 'Soc en Pau. Desenvolupador full stack que crea productes web i mòbils amb mentalitat pràctica. Transformo idees en eines que la gent realment fa servir.',
         wid_label: 'Què faig',
         wid_title: 'Construeixo coses que <em>funcionen</em>',
         wid_web_title: 'Aplicacions Web',
@@ -2306,10 +2235,10 @@
         contact_message: 'Missatge',
         contact_send: 'Enviar missatge',
         contact_social_intro: 'També em pots trobar en aquestes plataformes. Sempre estic content de connectar.',
-        tagline_hero: 'Cervell de backend. Ànima de garatge.',
+        tagline_hero: 'Entendre el perquè. Construir el com.',
         tagline_about: 'Full stack amb arestes.',
         tagline_contact: 'Apps web útils, fetes amb actitud.',
-        footer_text: '&copy; 2026 Prodelpe. Construït amb cura.'
+        footer_text: '&copy; 2026 prodelpe.com'
       },
 
       es: {
@@ -2319,10 +2248,9 @@
         nav_projects: 'Proyectos',
         nav_stack: 'Stack',
         nav_contact: 'Contacto',
-        hero_hello: 'Hola',
-        hero_headline: 'Construyo <em>experiencias web</em> útiles',
-        hero_headline_em: 'experiencias web',
-        hero_sub: 'Desarrollador full stack que crea productos web y móviles con mentalidad práctica. Transformo ideas en herramientas que la gente realmente usa.',
+        hero_headline: 'Construyo <em>experiencias</em> útiles.',
+        hero_headline_em: 'experiencias',
+        hero_sub: 'Soy Pau. Desarrollador full stack que crea productos web y móviles con mentalidad práctica. Transformo ideas en herramientas que la gente realmente usa.',
         wid_label: 'Qué hago',
         wid_title: 'Construyendo cosas que <em>funcionan</em>',
         wid_web_title: 'Aplicaciones Web',
@@ -2380,10 +2308,10 @@
         contact_message: 'Mensaje',
         contact_send: 'Enviar mensaje',
         contact_social_intro: 'También puedes encontrarme en estas plataformas. Siempre estoy encantado de conectar.',
-        tagline_hero: 'Cerebro de backend. Alma de garaje.',
+        tagline_hero: 'Entender el porqué. Construir el cómo.',
         tagline_about: 'Full stack con filo.',
         tagline_contact: 'Apps web útiles, hechas con actitud.',
-        footer_text: '&copy; 2026 Prodelpe. Construido con cuidado.'
+        footer_text: '&copy; 2026 prodelpe.com'
       }
     };
 
@@ -2392,41 +2320,52 @@
        ============================================ */
     let currentLang = 'en';
 
+    function applyLanguage(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        const isActive = btn.dataset.lang === lang;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive);
+      });
+
+      currentLang = lang;
+    }
+
     function setLanguage(lang) {
       if (lang === currentLang) return;
-      currentLang = lang;
-
       document.body.classList.add('lang-switching');
-
       setTimeout(() => {
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-          const key = el.getAttribute('data-i18n');
-          if (translations[lang] && translations[lang][key]) {
-            el.innerHTML = translations[lang][key];
-          }
-        });
-
-        // Update anaglyph data-text
-        const heroHello = document.querySelector('.hero-hello');
-        if (heroHello && translations[lang].hero_hello) {
-          heroHello.setAttribute('data-text', translations[lang].hero_hello);
-        }
-
-        document.documentElement.lang = lang;
-
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-          const isActive = btn.dataset.lang === lang;
-          btn.classList.toggle('active', isActive);
-          btn.setAttribute('aria-pressed', isActive);
-        });
-
+        applyLanguage(lang);
         document.body.classList.remove('lang-switching');
       }, 150);
     }
 
+    function detectInitialLang() {
+      try {
+        const saved = localStorage.getItem('lang');
+        if (saved && translations[saved]) return saved;
+      } catch (e) {}
+      const navLang = (navigator.language || 'en').slice(0, 2).toLowerCase();
+      return translations[navLang] ? navLang : 'en';
+    }
+
     document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+      btn.addEventListener('click', () => {
+        try { localStorage.setItem('lang', btn.dataset.lang); } catch (e) {}
+        setLanguage(btn.dataset.lang);
+      });
     });
+
+    const initialLang = detectInitialLang();
+    if (initialLang !== currentLang) applyLanguage(initialLang);
 
     /* ============================================
        SCROLL REVEAL — Intersection Observer
