@@ -2061,7 +2061,7 @@
         <span class="tagline" data-i18n="tagline_contact">Useful web apps, built with attitude.</span>
       </div>
       <div class="contact-grid">
-        <form class="contact-form reveal" id="contactForm" onsubmit="return false;">
+        <form class="contact-form reveal" id="contactForm">
           <div class="form-field">
             <label for="name" data-i18n="contact_name">Name</label>
             <input type="text" id="name" name="name" required>
@@ -2074,6 +2074,9 @@
             <label for="message" data-i18n="contact_message">Message</label>
             <textarea id="message" name="message" required></textarea>
           </div>
+          <input type="hidden" name="_subject" value="New message from prodelpe.com">
+          <input type="hidden" name="_template" value="table">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button type="submit" class="form-submit" data-i18n="contact_send">Send message</button>
         </form>
         <div class="contact-social reveal">
@@ -2462,19 +2465,36 @@
     /* ============================================
        CONTACT FORM STUB
        ============================================ */
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = this.querySelector('.form-submit');
       const originalText = btn.textContent;
-      btn.textContent = 'SENT';
-      btn.style.background = 'var(--green)';
-      btn.style.borderColor = 'var(--green)';
-      setTimeout(() => {
-        btn.textContent = originalText;
-        btn.style.background = '';
-        btn.style.borderColor = '';
+      btn.disabled = true;
+      btn.textContent = '...';
+
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/a01285eaef712db8306b3c53aafb3b3f', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(this)
+        });
+        if (!response.ok) throw new Error('Network error');
+        btn.textContent = 'SENT';
+        btn.style.background = 'var(--green)';
+        btn.style.borderColor = 'var(--green)';
         this.reset();
-      }, 2000);
+      } catch (err) {
+        btn.textContent = 'ERROR';
+        btn.style.background = 'var(--red)';
+        btn.style.borderColor = 'var(--red)';
+      } finally {
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = '';
+          btn.style.borderColor = '';
+          btn.disabled = false;
+        }, 3000);
+      }
     });
 
     /* ============================================
