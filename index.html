@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>prodelpe.com — Full Stack Developer</title>
-  <meta name="description" content="Full stack developer specializing in Laravel, PHP, and building useful web & mobile experiences.">
+  <meta name="description" content="Pau Rodellino, web developer. Projects built with Laravel, APIs and AI.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -675,99 +675,6 @@
     }
 
     /* ============================================
-       WHAT I DO SECTION
-       ============================================ */
-    .what-i-do {
-      padding: var(--section-gap) 0;
-      position: relative;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      margin-top: 48px;
-    }
-
-    /* Cards — poster / flyer feel */
-    .service-card {
-      background: var(--cream);
-      border: 3px solid var(--text);
-      padding: 36px 28px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    /* Slight random rotation on cards for poster-board feel */
-    .service-card:nth-child(1) { transform: rotate(-1deg); }
-    .service-card:nth-child(2) { transform: rotate(0.5deg); }
-    .service-card:nth-child(3) { transform: rotate(-0.5deg); }
-
-    .service-card:hover {
-      transform: rotate(0deg) translateY(-10px) scale(1.02) !important;
-      box-shadow:
-        8px 8px 0 var(--red),
-        -4px -4px 0 var(--green);
-    }
-
-    .service-icon {
-      width: 56px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 22px;
-      position: relative;
-    }
-
-    .service-card:nth-child(1) .service-icon { color: var(--red); }
-    .service-card:nth-child(2) .service-icon { color: var(--green); }
-    .service-card:nth-child(3) .service-icon { color: var(--red-deep); }
-
-    .service-card h3 {
-      font-family: var(--font-display);
-      font-size: 18px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 10px;
-    }
-
-    .service-card p {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.65;
-    }
-
-    /* Top bar accent — chunky */
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-    }
-
-    .service-card:nth-child(1)::before { background: var(--red); }
-    .service-card:nth-child(2)::before { background: var(--green); }
-    .service-card:nth-child(3)::before { background: linear-gradient(90deg, var(--red), var(--green)); }
-
-    /* Corner decoration */
-    .service-card::after {
-      content: '///';
-      position: absolute;
-      bottom: 12px;
-      right: 16px;
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      opacity: 0.1;
-    }
-
-    /* ============================================
        ABOUT SECTION
        ============================================ */
     .about {
@@ -822,6 +729,24 @@
       background: var(--red);
     }
 
+    .about-quote cite {
+      display: block;
+      margin-top: 14px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-shadow: none;
+    }
+
+    .about-quote cite::before {
+      content: '— ';
+      color: var(--red);
+    }
+
     /* Green offset bar */
     .about-quote::after {
       content: '';
@@ -845,8 +770,8 @@
 
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
       margin-top: 48px;
     }
 
@@ -873,6 +798,7 @@
     }
 
     .project-thumb {
+      display: block;
       width: 100%;
       aspect-ratio: 16 / 10;
       position: relative;
@@ -880,43 +806,12 @@
       border-bottom: 3px solid var(--text);
     }
 
-    .project-thumb-placeholder {
+    .project-thumb img {
+      display: block;
       width: 100%;
       height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      opacity: 0.4;
-    }
-
-    /* Diagonal hatching on thumbnails */
-    .project-thumb-placeholder::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: 0.04;
-      background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 8px,
-        var(--text) 8px,
-        var(--text) 9px
-      );
-    }
-
-    .project-card:nth-child(1) .project-thumb {
-      background: linear-gradient(135deg, rgba(212,43,43,0.08), var(--bg-warm));
-    }
-    .project-card:nth-child(2) .project-thumb {
-      background: linear-gradient(135deg, rgba(27,140,90,0.08), var(--bg-warm));
-    }
-    .project-card:nth-child(3) .project-thumb {
-      background: linear-gradient(135deg, rgba(212,43,43,0.06), rgba(27,140,90,0.06));
+      object-fit: cover;
+      object-position: top;
     }
 
     .project-info {
@@ -925,17 +820,77 @@
 
     .project-name {
       font-family: var(--font-display);
-      font-size: 18px;
+      font-size: 26px;
       text-transform: uppercase;
-      margin-bottom: 6px;
+      margin-bottom: 10px;
       letter-spacing: 0.3px;
     }
 
+    .project-summary {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-style: italic;
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+
     .project-desc {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--text-muted);
-      margin-bottom: 16px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .project-inside {
+      font-family: var(--font-display);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .project-points {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .project-points li {
+      position: relative;
+      padding: 10px 0 10px 22px;
+      border-top: 2px dashed var(--shadow-hard);
+      font-size: 14px;
       line-height: 1.55;
+    }
+
+    .project-points li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 17px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    .project-points li:nth-child(even)::before {
+      background: var(--green);
+    }
+
+    .project-stack {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
     }
 
     .project-link {
@@ -958,6 +913,34 @@
     .project-link svg {
       width: 16px;
       height: 16px;
+    }
+
+    .side-project {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 16px 48px;
+      align-items: start;
+      margin-top: 64px;
+      padding: 28px 32px;
+      border: 3px dashed var(--text);
+      transform: rotate(-0.4deg);
+    }
+
+    .side-project .project-name {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .side-project .tagline {
+      margin-top: 0;
+    }
+
+    .side-project .project-desc {
+      margin-bottom: 14px;
+    }
+
+    .about .stack-container {
+      margin-top: 72px;
     }
 
     /* ============================================
@@ -1029,122 +1012,6 @@
 
     .pill-dot.red { background: var(--red); }
     .pill-dot.green { background: var(--green); }
-
-    /* ============================================
-       EXPERIENCE SECTION — punched-card timeline
-       ============================================ */
-    .experience {
-      padding: var(--section-gap) 0;
-      position: relative;
-    }
-
-    .timeline {
-      margin-top: 56px;
-      position: relative;
-      padding-left: 32px;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 8px;
-      top: 6px;
-      bottom: 6px;
-      width: 3px;
-      background:
-        repeating-linear-gradient(
-          to bottom,
-          var(--text) 0 8px,
-          transparent 8px 16px
-        );
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 36px;
-    }
-
-    .timeline-item:last-child { margin-bottom: 0; }
-
-    .timeline-dot {
-      position: absolute;
-      left: -32px;
-      top: 18px;
-      width: 18px;
-      height: 18px;
-      background: var(--red);
-      border: 3px solid var(--text);
-      border-radius: 50%;
-      box-shadow: 2px 2px 0 var(--text);
-    }
-
-    .timeline-item:nth-child(even) .timeline-dot { background: var(--green); }
-
-    .timeline-card {
-      background: var(--cream);
-      border: 3px solid var(--text);
-      padding: 22px 26px 24px;
-      box-shadow: 6px 6px 0 var(--shadow-brutal);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .timeline-item:nth-child(odd) .timeline-card { transform: rotate(-0.4deg); }
-    .timeline-item:nth-child(even) .timeline-card { transform: rotate(0.5deg); }
-
-    .timeline-card:hover {
-      transform: rotate(0deg) translateY(-4px) !important;
-      box-shadow:
-        8px 8px 0 var(--red),
-        -4px -4px 0 var(--green);
-    }
-
-    .timeline-head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 8px 18px;
-      margin-bottom: 4px;
-    }
-
-    .timeline-role {
-      font-family: var(--font-display);
-      font-size: 17px;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      color: var(--red);
-    }
-
-    .timeline-dates {
-      font-family: var(--font-sans);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    .timeline-company {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .timeline-location {
-      font-size: 12px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 12px;
-    }
-
-    .timeline-desc {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
 
     /* ============================================
        CONTACT SECTION
@@ -1577,15 +1444,13 @@
         transform: rotate(-2deg);
       }
 
-      .services-grid,
-      .projects-grid {
+      .projects-grid,
+      .side-project {
         grid-template-columns: 1fr;
         gap: 20px;
       }
 
-      .service-card:nth-child(1),
-      .service-card:nth-child(2),
-      .service-card:nth-child(3),
+      .side-project,
       .project-card:nth-child(1),
       .project-card:nth-child(2),
       .project-card:nth-child(3) {
@@ -1595,11 +1460,6 @@
       .about-content {
         grid-template-columns: 1fr;
         gap: 40px;
-      }
-
-      .timeline-item:nth-child(odd) .timeline-card,
-      .timeline-item:nth-child(even) .timeline-card {
-        transform: none;
       }
 
       .contact-grid {
@@ -1718,11 +1578,8 @@
       <a href="#" class="nav-logo">prodelpe.com</a>
       <div class="nav-right">
         <ul class="nav-links">
-          <li><a href="#what-i-do" data-i18n="nav_work">What I do</a></li>
+          <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
           <li><a href="#about" data-i18n="nav_about">About</a></li>
-          <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
-          <!-- <li><a href="#projects" data-i18n="nav_projects">Projects</a></li> -->
-          <li><a href="#stack" data-i18n="nav_stack">Stack</a></li>
           <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
         </ul>
         <div class="lang-switcher" role="group" aria-label="Language switcher">
@@ -1739,11 +1596,8 @@
 
   <!-- Mobile menu overlay -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#what-i-do" data-i18n="nav_work">What I do</a>
+    <a href="#projects" data-i18n="nav_projects">Projects</a>
     <a href="#about" data-i18n="nav_about">About</a>
-    <a href="#experience" data-i18n="nav_experience">Experience</a>
-    <!-- <a href="#projects" data-i18n="nav_projects">Projects</a> -->
-    <a href="#stack" data-i18n="nav_stack">Stack</a>
     <a href="#contact" data-i18n="nav_contact">Contact</a>
   </div>
 
@@ -1758,9 +1612,8 @@
 
     <div class="container hero-inner">
       <div class="hero-text stagger">
-        <h1 class="hero-headline reveal" data-i18n="hero_headline">I build useful <em data-i18n="hero_headline_em">experiences</em>.</h1>
-        <p class="hero-sub reveal" data-i18n="hero_sub">I'm Pau. Full stack developer crafting web and mobile products with a practical mindset. I turn ideas into tools people actually use.</p>
-        <span class="tagline reveal" data-i18n="tagline_hero">Understand the why. Build the how.</span>
+        <h1 class="hero-headline reveal" data-i18n="hero_headline"></h1>
+        <p class="hero-sub reveal" data-i18n="hero_sub"></p>
       </div>
       <div class="hero-visual reveal">
         <div class="avatar-frame">
@@ -1810,35 +1663,90 @@
   <div class="section-divider-deco"></div>
 
   <!-- ==========================================
-       WHAT I DO SECTION
+       PROJECTS SECTION
        ========================================== -->
-  <section class="what-i-do" id="what-i-do">
+  <section class="projects" id="projects">
     <div class="container">
       <div class="reveal">
-        <p class="section-label" data-i18n="wid_label">What I do</p>
-        <h2 class="section-title" data-i18n="wid_title">Building things that <em>work</em></h2>
+        <p class="section-label" data-i18n="proj_label">Projects</p>
+        <h2 class="section-title" data-i18n="proj_title">Things I've <em>built</em></h2>
+        <span class="tagline" data-i18n="proj_tagline"></span>
       </div>
-      <div class="services-grid stagger">
-        <div class="service-card reveal">
-          <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      <div class="projects-grid stagger">
+        <div class="project-card reveal">
+          <div class="project-tape"></div>
+          <div class="project-pin"></div>
+          <div class="project-number">01</div>
+          <a class="project-thumb" href="https://tustack.es" target="_blank" rel="noopener">
+            <img src="img/tustack.jpg" alt="TuStack" loading="lazy" width="1440" height="900">
+          </a>
+          <div class="project-info">
+            <h3 class="project-name">TuStack</h3>
+            <p class="project-summary" data-i18n="tustack_summary"></p>
+            <p class="project-desc" data-i18n="tustack_desc"></p>
+            <p class="project-inside" data-i18n="proj_inside"></p>
+            <ul class="project-points">
+              <li data-i18n="tustack_point_1"></li>
+              <li data-i18n="tustack_point_2"></li>
+              <li data-i18n="tustack_point_3"></li>
+              <li data-i18n="tustack_point_4"></li>
+            </ul>
+            <p class="project-stack">Laravel · Redis · Horizon · MySQL · Meilisearch · Gemini · Filament · Alpine.js</p>
+            <div class="project-links">
+              <a href="https://tustack.es" target="_blank" rel="noopener" class="project-link"><span data-i18n="proj_view_live">See it live</span> →</a>
+              <a href="https://github.com/prodelpe/tustack" target="_blank" rel="noopener" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                <span data-i18n="proj_view_github">View on GitHub</span>
+              </a>
+            </div>
           </div>
-          <h3 data-i18n="wid_web_title">Web Apps</h3>
-          <p data-i18n="wid_web_desc">Full stack applications built with Laravel and modern front-end tools. From SaaS platforms to internal dashboards—whatever the product needs.</p>
         </div>
-        <div class="service-card reveal">
-          <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></svg>
+        <div class="project-card reveal">
+          <div class="project-tape"></div>
+          <div class="project-pin"></div>
+          <div class="project-number">02</div>
+          <a class="project-thumb" href="https://studiio.prodelpe.com" target="_blank" rel="noopener">
+            <img src="img/studiio.jpg" alt="Studiio" loading="lazy" width="1440" height="900">
+          </a>
+          <div class="project-info">
+            <h3 class="project-name">Studiio</h3>
+            <p class="project-summary" data-i18n="studiio_summary"></p>
+            <p class="project-desc" data-i18n="studiio_desc"></p>
+            <p class="project-inside" data-i18n="proj_inside"></p>
+            <ul class="project-points">
+              <li data-i18n="studiio_point_1"></li>
+              <li data-i18n="studiio_point_2"></li>
+              <li data-i18n="studiio_point_3"></li>
+              <li data-i18n="studiio_point_4"></li>
+            </ul>
+            <p class="project-stack">Laravel · Filament · Stripe · Gemini · Pinecone · Three.js</p>
+            <div class="project-links">
+              <a href="https://studiio.prodelpe.com" target="_blank" rel="noopener" class="project-link"><span data-i18n="proj_view_live">See it live</span> →</a>
+              <a href="https://github.com/prodelpe/studiio" target="_blank" rel="noopener" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                <span data-i18n="proj_view_github">View on GitHub</span>
+              </a>
+            </div>
           </div>
-          <h3 data-i18n="wid_mobile_title">Mobile Apps</h3>
-          <p data-i18n="wid_mobile_desc">Cross-platform mobile experiences that feel native. Connected to robust backends, ready for real users from day one.</p>
         </div>
-        <div class="service-card reveal">
-          <div class="service-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 3v18M3 12h18M8 8l-5 4 5 4M16 8l5 4-5 4"/></svg>
+      </div>
+      <div class="side-project reveal">
+        <div>
+          <h3 class="project-name">Stalvi</h3>
+          <span class="tagline" data-i18n="stalvi_kicker">Also, for my own use</span>
+        </div>
+        <div>
+          <p class="project-desc" data-i18n="stalvi_desc"></p>
+          <div class="project-links">
+            <a href="https://github.com/prodelpe/stalvi" target="_blank" rel="noopener" class="project-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              <span data-i18n="stalvi_backend">Backend</span>
+            </a>
+            <a href="https://github.com/prodelpe/stalvi-mobile" target="_blank" rel="noopener" class="project-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              <span data-i18n="stalvi_mobile">Mobile app</span>
+            </a>
           </div>
-          <h3 data-i18n="wid_admin_title">Admin Panels & Integrations</h3>
-          <p data-i18n="wid_admin_desc">Clean admin interfaces and third-party integrations. Payment systems, APIs, automations—the invisible work that makes products run.</p>
         </div>
       </div>
     </div>
@@ -1853,174 +1761,27 @@
     <div class="container">
       <div class="reveal">
         <p class="section-label" data-i18n="about_label">About</p>
-        <h2 class="section-title" data-i18n="about_title">The person behind the code</h2>
+        <h2 class="section-title" data-i18n="about_title">About me</h2>
       </div>
       <div class="about-content">
         <div class="about-text reveal">
-          <p data-i18n="about_p1">I'm a full stack developer who enjoys building products that are both useful and pleasant to use. I work across the entire stack—from database design to polished front-end interfaces.</p>
-          <p data-i18n="about_p2">Most of my work revolves around Laravel and PHP, but I'm comfortable moving between technologies when a project calls for it. What I care about most is clean execution and delivering tools that solve real problems.</p>
-          <p data-i18n="about_p3">I like working on projects where I can see the full picture—understanding the why behind what I'm building, not just the how.</p>
+          <p data-i18n="about_p1"></p>
+          <p data-i18n="about_p2"></p>
         </div>
         <div class="about-aside reveal">
-          <blockquote class="about-quote" data-i18n="about_quote">Good software feels obvious once it exists. Getting there is the interesting part.</blockquote>
-          <span class="tagline" style="margin-top:24px;" data-i18n="tagline_about">Full stack with sharp edges.</span>
+          <blockquote class="about-quote" data-i18n="about_quote"></blockquote>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-divider-deco"></div>
-
-  <!-- ==========================================
-       EXPERIENCE SECTION
-       ========================================== -->
-  <section class="experience" id="experience">
-    <div class="container">
-      <div class="reveal">
-        <p class="section-label" data-i18n="exp_label">Experience</p>
-        <h2 class="section-title" data-i18n="exp_title">Where I've been</h2>
-      </div>
-      <div class="timeline stagger">
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="timeline-head">
-              <h3 class="timeline-role" data-i18n="exp_1_role">PHP Full Stack Developer</h3>
-              <span class="timeline-dates" data-i18n="exp_1_dates">Aug 2020 — Present</span>
-            </div>
-            <p class="timeline-company" data-i18n="exp_1_company">Creagia</p>
-            <p class="timeline-location" data-i18n="exp_1_location">Igualada, Barcelona</p>
-            <p class="timeline-desc" data-i18n="exp_1_desc">Building web applications from scratch with PHP and Laravel. Daily work with Filament, Livewire, Alpine.js, Vue.js, payment integration with Stripe, search engines like Meilisearch, and AI tools.</p>
-          </div>
-        </div>
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="timeline-head">
-              <h3 class="timeline-role" data-i18n="exp_2_role">Web Developer</h3>
-              <span class="timeline-dates" data-i18n="exp_2_dates">Nov 2017 — Aug 2020</span>
-            </div>
-            <p class="timeline-company" data-i18n="exp_2_company">Instint Estratègies Digitals</p>
-            <p class="timeline-location" data-i18n="exp_2_location">Igualada, Barcelona</p>
-            <p class="timeline-desc" data-i18n="exp_2_desc">Development of themes and plugins for WordPress and Prestashop. Front-end development with CSS and Bootstrap. Content management for corporate and e-commerce websites.</p>
-          </div>
-        </div>
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="timeline-head">
-              <h3 class="timeline-role" data-i18n="exp_3_role">Web Designer</h3>
-              <span class="timeline-dates" data-i18n="exp_3_dates">Oct 2014 — Mar 2015</span>
-            </div>
-            <p class="timeline-company" data-i18n="exp_3_company">Advisor Websites</p>
-            <p class="timeline-location" data-i18n="exp_3_location">Vancouver, Canada</p>
-            <p class="timeline-desc" data-i18n="exp_3_desc">Custom web layouts with LESS, CSS and jQuery.</p>
-          </div>
-        </div>
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="timeline-head">
-              <h3 class="timeline-role" data-i18n="exp_4_role">Web Developer (Internship)</h3>
-              <span class="timeline-dates" data-i18n="exp_4_dates">Jul 2014</span>
-            </div>
-            <p class="timeline-company" data-i18n="exp_4_company">Creagia</p>
-            <p class="timeline-location" data-i18n="exp_4_location">Igualada, Barcelona</p>
-            <p class="timeline-desc" data-i18n="exp_4_desc">Development of a PHP and MySQL application using the CodeIgniter framework.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-divider-deco"></div>
-
-  <!-- ==========================================
-       PROJECTS SECTION (hidden until real projects are ready)
-       ========================================== -->
-  <!--
-  <section class="projects" id="projects">
-    <div class="container">
-      <div class="reveal">
-        <p class="section-label" data-i18n="proj_label">Selected Projects</p>
-        <h2 class="section-title" data-i18n="proj_title">Things I've built</h2>
-      </div>
-      <div class="projects-grid stagger">
-        <div class="project-card reveal">
-          <div class="project-tape"></div>
-          <div class="project-pin"></div>
-          <div class="project-number">01</div>
-          <div class="project-thumb">
-            <div class="project-thumb-placeholder">Screenshot</div>
-          </div>
-          <div class="project-info">
-            <h3 class="project-name" data-i18n="proj_1_name">Project Alpha</h3>
-            <p class="project-desc" data-i18n="proj_1_desc">A SaaS platform for managing subscriptions and billing with Stripe integration.</p>
-            <a href="https://github.com/your-username" target="_blank" rel="noopener" class="project-link">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              <span data-i18n="proj_view_github">View on GitHub</span> →
-            </a>
-          </div>
-        </div>
-        <div class="project-card reveal">
-          <div class="project-tape"></div>
-          <div class="project-pin"></div>
-          <div class="project-number">02</div>
-          <div class="project-thumb">
-            <div class="project-thumb-placeholder">Screenshot</div>
-          </div>
-          <div class="project-info">
-            <h3 class="project-name" data-i18n="proj_2_name">Project Beta</h3>
-            <p class="project-desc" data-i18n="proj_2_desc">A mobile-first booking app with real-time availability and payment processing.</p>
-            <a href="https://github.com/your-username" target="_blank" rel="noopener" class="project-link">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              <span data-i18n="proj_view_github">View on GitHub</span> →
-            </a>
-          </div>
-        </div>
-        <div class="project-card reveal">
-          <div class="project-tape"></div>
-          <div class="project-pin"></div>
-          <div class="project-number">03</div>
-          <div class="project-thumb">
-            <div class="project-thumb-placeholder">Screenshot</div>
-          </div>
-          <div class="project-info">
-            <h3 class="project-name" data-i18n="proj_3_name">Project Gamma</h3>
-            <p class="project-desc" data-i18n="proj_3_desc">An internal admin panel built with Filament for managing logistics and inventory.</p>
-            <a href="https://github.com/your-username" target="_blank" rel="noopener" class="project-link">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              <span data-i18n="proj_view_github">View on GitHub</span> →
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-divider-deco"></div>
-  -->
-
-  <!-- ==========================================
-       STACK SECTION
-       ========================================== -->
-  <section class="stack" id="stack">
-    <div class="container">
-      <div class="reveal">
-        <p class="section-label" data-i18n="stack_label">Stack & Tools</p>
-        <h2 class="section-title" data-i18n="stack_title">What I work with</h2>
       </div>
       <div class="stack-container reveal">
         <div class="stack-group">
           <p class="stack-group-label" data-i18n="stack_backend">Backend</p>
           <div class="stack-pills">
-            <span class="stack-pill"><span class="pill-dot red"></span>PHP 8</span>
+            <span class="stack-pill"><span class="pill-dot red"></span>PHP</span>
             <span class="stack-pill"><span class="pill-dot red"></span>Laravel</span>
             <span class="stack-pill"><span class="pill-dot green"></span>MySQL</span>
-            <span class="stack-pill"><span class="pill-dot green"></span>REST APIs</span>
-            <span class="stack-pill"><span class="pill-dot red"></span>Stripe</span>
-            <span class="stack-pill"><span class="pill-dot green"></span>Meilisearch</span>
-            <span class="stack-pill"><span class="pill-dot red"></span>Pinecone</span>
+            <span class="stack-pill"><span class="pill-dot red"></span>Redis</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>Horizon</span>
+            <span class="stack-pill"><span class="pill-dot red"></span>REST APIs</span>
           </div>
         </div>
         <div class="stack-group">
@@ -2030,18 +1791,17 @@
             <span class="stack-pill"><span class="pill-dot red"></span>Alpine.js</span>
             <span class="stack-pill"><span class="pill-dot green"></span>Vue.js</span>
             <span class="stack-pill"><span class="pill-dot red"></span>Tailwind CSS</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>Expo / React Native</span>
           </div>
         </div>
         <div class="stack-group">
-          <p class="stack-group-label" data-i18n="stack_tools">Tools & Platforms</p>
+          <p class="stack-group-label" data-i18n="stack_integrations">AI and integrations</p>
           <div class="stack-pills">
+            <span class="stack-pill"><span class="pill-dot red"></span>Gemini</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>Pinecone</span>
+            <span class="stack-pill"><span class="pill-dot red"></span>Stripe</span>
+            <span class="stack-pill"><span class="pill-dot green"></span>Meilisearch</span>
             <span class="stack-pill"><span class="pill-dot red"></span>Filament</span>
-            <span class="stack-pill"><span class="pill-dot green"></span>Git</span>
-            <span class="stack-pill"><span class="pill-dot red"></span>Docker</span>
-            <span class="stack-pill"><span class="pill-dot green"></span>Vite</span>
-            <span class="stack-pill"><span class="pill-dot red"></span>npm</span>
-            <span class="stack-pill"><span class="pill-dot green"></span>PHPUnit</span>
-            <span class="stack-pill"><span class="pill-dot red"></span>AI / LLMs</span>
           </div>
         </div>
       </div>
@@ -2057,8 +1817,7 @@
     <div class="container">
       <div class="reveal">
         <p class="section-label" data-i18n="contact_label">Contact</p>
-        <h2 class="section-title" data-i18n="contact_title">Let's talk</h2>
-        <span class="tagline" data-i18n="tagline_contact">Useful web apps, built with attitude.</span>
+        <h2 class="section-title" data-i18n="contact_title">Contact</h2>
       </div>
       <div class="contact-grid">
         <form class="contact-form reveal" id="contactForm">
@@ -2080,7 +1839,7 @@
           <button type="submit" class="form-submit" data-i18n="contact_send">Send message</button>
         </form>
         <div class="contact-social reveal">
-          <p class="contact-social-intro" data-i18n="contact_social_intro">You can also find me on these platforms. I'm always happy to connect.</p>
+          <p class="contact-social-intro" data-i18n="contact_social_intro">If you think I'd fit in your team, or you'd like to talk about any of these projects, drop me a line. My CV is on LinkedIn.</p>
           <a href="https://www.linkedin.com/in/pau-rodellino/" target="_blank" rel="noopener" class="social-link">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             LinkedIn
@@ -2112,221 +1871,140 @@
        ============================================ */
     const translations = {
       en: {
-        nav_work: 'What I do',
-        nav_about: 'About',
-        nav_experience: 'Experience',
         nav_projects: 'Projects',
-        nav_stack: 'Stack',
+        nav_about: 'About',
         nav_contact: 'Contact',
-        hero_headline: 'I build useful <em>experiences</em>.',
-        hero_headline_em: 'experiences',
-        hero_sub: 'I\'m Pau. Full stack developer crafting web and mobile products with a practical mindset. I turn ideas into tools people actually use.',
-        wid_label: 'What I do',
-        wid_title: 'Building things that <em>work</em>',
-        wid_web_title: 'Web Apps',
-        wid_web_desc: 'Full stack applications built with Laravel and modern front-end tools. From SaaS platforms to internal dashboards—whatever the product needs.',
-        wid_mobile_title: 'Mobile Apps',
-        wid_mobile_desc: 'Cross-platform mobile experiences that feel native. Connected to robust backends, ready for real users from day one.',
-        wid_admin_title: 'Admin Panels & Integrations',
-        wid_admin_desc: 'Clean admin interfaces and third-party integrations. Payment systems, APIs, automations—the invisible work that makes products run.',
+        hero_headline: 'I build <em>apps</em> end to end.',
+        hero_sub: 'I\'m Pau, a full stack developer. I build all kinds of Laravel apps: platforms with payments, admin panels, integrations with other services and AI-powered features. And when needed, the front end and the mobile app too.',
+        proj_label: 'Projects',
+        proj_title: 'Things I\'ve <em>built</em>',
+        proj_tagline: 'My own projects, live and open source',
+        proj_inside: 'What\'s inside',
+        proj_view_live: 'See it live',
+        proj_view_github: 'Code on GitHub',
+        tustack_summary: 'Which companies in Spain are hiring people who know your stack?',
+        tustack_desc: 'Every night it collects tech job offers from three job boards, works out which technologies each one asks for and groups them by company. You search by technology and province, and instead of ads you get companies. There are over 5,000 right now.',
+        tustack_point_1: 'Two APIs (Adzuna and Jooble) and a scraper behind the same interface. Adding a new job board takes one class.',
+        tustack_point_2: 'Queues with Redis and Horizon: every night a batch of jobs goes out, one per technology, and when it finishes I get a summary on Telegram.',
+        tustack_point_3: 'Gemini merges duplicate companies and fills in their profiles. Local rules weed out the obvious cases first, and every answer is stored so it\'s never paid for twice.',
+        tustack_point_4: 'Meilisearch search, a map, trends per technology and alerts by email or Telegram. In three languages, with around 230 tests.',
+        studiio_summary: 'A marketplace where artists sell original work with no middleman.',
+        studiio_desc: 'It\'s a demo, but it has what a real product would: payments, subscriptions, an admin panel and a search that understands what you ask for.',
+        studiio_point_1: 'Stripe all over: tiered artist subscriptions with Cashier and split payouts with Stripe Connect.',
+        studiio_point_2: 'Semantic search. When someone uploads a piece, a queued job asks Gemini to describe it, turns that into an embedding and stores it in Pinecone. Search for “a dark, stormy sea” and it finds the painting even if the title says nothing of the sort.',
+        studiio_point_3: 'An assistant inside the admin panel that answers questions about the platform by calling tools that query the database.',
+        studiio_point_4: '3D exhibitions with Three.js for artists on the top subscription.',
+        stalvi_kicker: 'Also, for my own use',
+        stalvi_desc: 'The app I use to keep track of what I spend each day. The backend is Laravel with Filament, and it exposes a REST API used by a mobile app built with Expo and React Native.',
+        stalvi_backend: 'Backend',
+        stalvi_mobile: 'Mobile app',
         about_label: 'About',
-        about_title: 'The person behind the code',
-        about_p1: 'I\'m a full stack developer with over 8 years of experience building robust, scalable web applications. I work across the entire stack—from database design to polished front-end interfaces.',
-        about_p2: 'My daily toolkit lives around the TALL stack (Tailwind, Alpine, Livewire, Laravel) and tools like Filament, Vue.js, Stripe and Meilisearch. I actively integrate AI and automation into my workflow to ship smarter, more efficient solutions.',
-        about_p3: 'I like working on projects where I can see the full picture—understanding the why behind what I\'m building, not just the how.',
-        about_quote: 'Good software feels obvious once it exists. Getting there is the interesting part.',
-        exp_label: 'Experience',
-        exp_title: 'Where I\'ve been',
-        exp_1_role: 'PHP Full Stack Developer',
-        exp_1_dates: 'Aug 2020 — Present',
-        exp_1_company: 'Creagia',
-        exp_1_location: 'Igualada, Barcelona',
-        exp_1_desc: 'Building web applications from scratch with PHP and Laravel. Daily work with Filament, Livewire, Alpine.js, Vue.js, payment integration with Stripe, search engines like Meilisearch, and AI tools.',
-        exp_2_role: 'Web Developer',
-        exp_2_dates: 'Nov 2017 — Aug 2020',
-        exp_2_company: 'Instint Estratègies Digitals',
-        exp_2_location: 'Igualada, Barcelona',
-        exp_2_desc: 'Development of themes and plugins for WordPress and Prestashop. Front-end development with CSS and Bootstrap. Content management for corporate and e-commerce websites.',
-        exp_3_role: 'Web Designer',
-        exp_3_dates: 'Oct 2014 — Mar 2015',
-        exp_3_company: 'Advisor Websites',
-        exp_3_location: 'Vancouver, Canada',
-        exp_3_desc: 'Custom web layouts with LESS, CSS and jQuery.',
-        exp_4_role: 'Web Developer (Internship)',
-        exp_4_dates: 'Jul 2014',
-        exp_4_company: 'Creagia',
-        exp_4_location: 'Igualada, Barcelona',
-        exp_4_desc: 'Development of a PHP and MySQL application using the CodeIgniter framework.',
-        proj_label: 'Selected Projects',
-        proj_title: 'Things I\'ve built',
-        proj_1_name: 'Project Alpha',
-        proj_1_desc: 'A SaaS platform for managing subscriptions and billing with Stripe integration.',
-        proj_2_name: 'Project Beta',
-        proj_2_desc: 'A mobile-first booking app with real-time availability and payment processing.',
-        proj_3_name: 'Project Gamma',
-        proj_3_desc: 'An internal admin panel built with Filament for managing logistics and inventory.',
-        proj_view_github: 'View on GitHub',
-        stack_label: 'Stack & Tools',
-        stack_title: 'What I work with',
+        about_title: 'About <em>me</em>',
+        about_p1: 'I mostly work with PHP and Laravel. Where I\'m happiest is the part nobody sees: databases, queues, integrations with other services, and AI that does real work rather than just demo well.',
+        about_p2: 'Away from work: music, vinyl, film, electronics and travel.',
+        about_quote: 'Do. Or do not. There is no try.<cite>Yoda</cite>',
         stack_backend: 'Backend',
-        stack_frontend: 'Frontend',
-        stack_tools: 'Tools & Platforms',
+        stack_frontend: 'Frontend and mobile',
+        stack_integrations: 'AI and integrations',
         contact_label: 'Contact',
-        contact_title: 'Let\'s talk',
+        contact_title: 'Contact',
         contact_name: 'Name',
         contact_email: 'Email',
         contact_message: 'Message',
         contact_send: 'Send message',
-        contact_social_intro: 'You can also find me on these platforms. I\'m always happy to connect.',
-        tagline_hero: 'Understand the why. Build the how.',
-        tagline_about: 'Full stack with sharp edges.',
-        tagline_contact: 'Useful web apps, built with attitude.',
+        contact_social_intro: 'If you think I\'d fit in your team, or you\'d like to talk about any of these projects, drop me a line. My CV is on LinkedIn.',
         footer_text: '&copy; 2026 prodelpe.com'
       },
 
       ca: {
-        nav_work: 'Què faig',
-        nav_about: 'Sobre mi',
-        nav_experience: 'Experiència',
         nav_projects: 'Projectes',
-        nav_stack: 'Stack',
+        nav_about: 'Sobre mi',
         nav_contact: 'Contacte',
-        hero_headline: 'Construeixo <em>experiències</em> útils.',
-        hero_headline_em: 'experiències',
-        hero_sub: 'Soc en Pau. Desenvolupador full stack que crea productes web i mòbils amb mentalitat pràctica. Transformo idees en eines que la gent realment fa servir.',
-        wid_label: 'Què faig',
-        wid_title: 'Construeixo coses que <em>funcionen</em>',
-        wid_web_title: 'Aplicacions Web',
-        wid_web_desc: 'Aplicacions full stack construïdes amb Laravel i eines front-end modernes. Des de plataformes SaaS fins a dashboards interns—el que el producte necessiti.',
-        wid_mobile_title: 'Apps Mòbils',
-        wid_mobile_desc: 'Experiències mòbils multiplataforma amb sensació nativa. Connectades a backends robustos, llestes per a usuaris reals des del primer dia.',
-        wid_admin_title: 'Panells d\'Admin & Integracions',
-        wid_admin_desc: 'Interfícies d\'administració netes i integracions amb tercers. Sistemes de pagament, APIs, automatitzacions—el treball invisible que fa funcionar els productes.',
+        hero_headline: 'Faig <em>aplicacions</em> de cap a peus.',
+        hero_sub: 'Soc en Pau, desenvolupador full stack. Faig aplicacions amb Laravel de tota mena: plataformes amb pagaments, panells de gestió, connexions amb altres serveis i funcionalitats amb IA. I, quan cal, també el frontend i l\'app mòbil.',
+        proj_label: 'Projectes',
+        proj_title: 'Coses que he <em>fet</em>',
+        proj_tagline: 'Projectes propis, publicats i amb el codi obert',
+        proj_inside: 'Què hi ha a dins',
+        proj_view_live: 'Veure-la en línia',
+        proj_view_github: 'Codi a GitHub',
+        tustack_summary: 'Quines empreses d\'Espanya busquen gent que sàpiga el teu stack?',
+        tustack_desc: 'Cada nit recull les ofertes tecnològiques de tres portals de feina, mira quines tecnologies demana cada una i les agrupa per empresa. Busques per tecnologia i província, i en lloc d\'anuncis et surten empreses. Ara n\'hi ha més de 5.000.',
+        tustack_point_1: 'Dues APIs (Adzuna i Jooble) i un scraper darrere d\'una mateixa interfície. Per afegir un portal nou n\'hi ha prou amb una classe.',
+        tustack_point_2: 'Cues amb Redis i Horizon: cada nit surt un lot de jobs, un per tecnologia, i quan acaba m\'arriba un resum per Telegram.',
+        tustack_point_3: 'Gemini per fusionar empreses duplicades i completar-ne la fitxa. Abans, unes regles locals descarten els casos clars, i cada resposta es desa perquè no es pagui dues vegades.',
+        tustack_point_4: 'Cerca amb Meilisearch, mapa, tendències per tecnologia i alertes per correu o Telegram. En tres idiomes i amb uns 230 tests.',
+        studiio_summary: 'Un marketplace on els artistes venen obra original sense intermediaris.',
+        studiio_desc: 'És una demo, però té el que tindria un producte de veritat: pagaments, subscripcions, panell d\'administració i una cerca que entén el que li demanes.',
+        studiio_point_1: 'Stripe a tot arreu: subscripcions dels artistes per nivells amb Cashier i cobraments repartits amb Stripe Connect.',
+        studiio_point_2: 'Cerca semàntica. Quan algú puja una obra, un job en cua demana a Gemini que la descrigui, en genera l\'embedding i el desa a Pinecone. Pots buscar «un mar fosc i tempestuós» i la troba encara que el títol no ho digui.',
+        studiio_point_3: 'Un assistent dins del panell d\'administració que respon preguntes sobre la plataforma cridant eines que consulten la base de dades.',
+        studiio_point_4: 'Exposicions en 3D amb Three.js per als artistes de la subscripció més alta.',
+        stalvi_kicker: 'També, per a ús propi',
+        stalvi_desc: 'L\'app amb què controlo què gasto cada dia. El backend és Laravel amb Filament i exposa una API REST que fa servir una app mòbil feta amb Expo i React Native.',
+        stalvi_backend: 'Backend',
+        stalvi_mobile: 'App mòbil',
         about_label: 'Sobre mi',
-        about_title: 'La persona darrere el codi',
-        about_p1: 'Soc un desenvolupador full stack amb més de 8 anys d\'experiència construint aplicacions web robustes i escalables. Treballo a tot l\'stack—des del disseny de bases de dades fins a interfícies front-end polides.',
-        about_p2: 'El meu dia a dia gira al voltant del TALL stack (Tailwind, Alpine, Livewire, Laravel) i eines com Filament, Vue.js, Stripe i Meilisearch. Integro IA i automatització als meus fluxos de treball per oferir solucions més intel·ligents i eficients.',
-        about_p3: 'M\'agrada treballar en projectes on puc veure la foto completa—entenent el perquè del que construeixo, no només el com.',
-        about_quote: 'El bon software sembla obvi un cop existeix. Arribar-hi és la part interessant.',
-        exp_label: 'Experiència',
-        exp_title: 'On he treballat',
-        exp_1_role: 'Desenvolupador Full Stack PHP',
-        exp_1_dates: 'Ago 2020 — Actualitat',
-        exp_1_company: 'Creagia',
-        exp_1_location: 'Igualada, Barcelona',
-        exp_1_desc: 'Construcció d\'aplicacions web des de zero amb PHP i Laravel. Feina diària amb Filament, Livewire, Alpine.js, Vue.js, integració de pagaments amb Stripe, motors de cerca com Meilisearch i eines d\'IA.',
-        exp_2_role: 'Desenvolupador Web',
-        exp_2_dates: 'Nov 2017 — Ago 2020',
-        exp_2_company: 'Instint Estratègies Digitals',
-        exp_2_location: 'Igualada, Barcelona',
-        exp_2_desc: 'Desenvolupament de temes i plugins per a WordPress i Prestashop. Front-end amb CSS i Bootstrap. Gestió de continguts per a webs corporatives i de comerç electrònic.',
-        exp_3_role: 'Dissenyador Web',
-        exp_3_dates: 'Oct 2014 — Mar 2015',
-        exp_3_company: 'Advisor Websites',
-        exp_3_location: 'Vancouver, Canadà',
-        exp_3_desc: 'Maquetacions web a mida amb LESS, CSS i jQuery.',
-        exp_4_role: 'Desenvolupador Web (Pràctiques)',
-        exp_4_dates: 'Jul 2014',
-        exp_4_company: 'Creagia',
-        exp_4_location: 'Igualada, Barcelona',
-        exp_4_desc: 'Desenvolupament d\'una aplicació PHP i MySQL amb el framework CodeIgniter.',
-        proj_label: 'Projectes Seleccionats',
-        proj_title: 'Coses que he construït',
-        proj_1_name: 'Projecte Alpha',
-        proj_1_desc: 'Una plataforma SaaS per gestionar subscripcions i facturació amb integració de Stripe.',
-        proj_2_name: 'Projecte Beta',
-        proj_2_desc: 'Una app de reserves mobile-first amb disponibilitat en temps real i processament de pagaments.',
-        proj_3_name: 'Projecte Gamma',
-        proj_3_desc: 'Un panell d\'administració intern construït amb Filament per gestionar logística i inventari.',
-        proj_view_github: 'Veure a GitHub',
-        stack_label: 'Stack i Eines',
-        stack_title: 'Amb què treballo',
+        about_title: 'Sobre <em>mi</em>',
+        about_p1: 'Treballo sobretot amb PHP i Laravel. On m\'ho passo millor és a la part que no es veu: bases de dades, cues, integracions amb altres serveis i IA que fa feina de veritat, no només de demo.',
+        about_p2: 'Fora de la feina: música, vinils, cinema, electrònica i viatges.',
+        about_quote: 'Fes-ho o no ho facis. Però no ho intentis.<cite>Mestre Yoda</cite>',
         stack_backend: 'Backend',
-        stack_frontend: 'Frontend',
-        stack_tools: 'Eines i Plataformes',
+        stack_frontend: 'Frontend i mòbil',
+        stack_integrations: 'IA i integracions',
         contact_label: 'Contacte',
-        contact_title: 'Parlem',
+        contact_title: 'Contacte',
         contact_name: 'Nom',
         contact_email: 'Correu electrònic',
         contact_message: 'Missatge',
         contact_send: 'Enviar missatge',
-        contact_social_intro: 'També em pots trobar en aquestes plataformes. Sempre estic content de connectar.',
-        tagline_hero: 'Entendre el perquè. Construir el com.',
-        tagline_about: 'Full stack amb arestes.',
-        tagline_contact: 'Apps web útils, fetes amb actitud.',
+        contact_social_intro: 'Si creus que puc encaixar en el teu equip o vols comentar algun d\'aquests projectes, escriu-me. El CV és a LinkedIn.',
         footer_text: '&copy; 2026 prodelpe.com'
       },
 
       es: {
-        nav_work: 'Qué hago',
-        nav_about: 'Sobre mí',
-        nav_experience: 'Experiencia',
         nav_projects: 'Proyectos',
-        nav_stack: 'Stack',
+        nav_about: 'Sobre mí',
         nav_contact: 'Contacto',
-        hero_headline: 'Construyo <em>experiencias</em> útiles.',
-        hero_headline_em: 'experiencias',
-        hero_sub: 'Soy Pau. Desarrollador full stack que crea productos web y móviles con mentalidad práctica. Transformo ideas en herramientas que la gente realmente usa.',
-        wid_label: 'Qué hago',
-        wid_title: 'Construyendo cosas que <em>funcionan</em>',
-        wid_web_title: 'Aplicaciones Web',
-        wid_web_desc: 'Aplicaciones full stack construidas con Laravel y herramientas front-end modernas. Desde plataformas SaaS hasta dashboards internos—lo que el producto necesite.',
-        wid_mobile_title: 'Apps Móviles',
-        wid_mobile_desc: 'Experiencias móviles multiplataforma con sensación nativa. Conectadas a backends robustos, listas para usuarios reales desde el primer día.',
-        wid_admin_title: 'Paneles de Admin & Integraciones',
-        wid_admin_desc: 'Interfaces de administración limpias e integraciones con terceros. Sistemas de pago, APIs, automatizaciones—el trabajo invisible que hace funcionar los productos.',
+        hero_headline: 'Hago <em>aplicaciones</em> de principio a fin.',
+        hero_sub: 'Soy Pau, desarrollador full stack. Hago aplicaciones con Laravel de todo tipo: plataformas con pagos, paneles de gestión, conexiones con otros servicios y funcionalidades con IA. Y, cuando hace falta, también el frontend y la app móvil.',
+        proj_label: 'Proyectos',
+        proj_title: 'Cosas que he <em>hecho</em>',
+        proj_tagline: 'Proyectos propios, publicados y con el código abierto',
+        proj_inside: 'Qué hay dentro',
+        proj_view_live: 'Verla en línea',
+        proj_view_github: 'Código en GitHub',
+        tustack_summary: '¿Qué empresas de España buscan gente que sepa tu stack?',
+        tustack_desc: 'Cada noche recoge las ofertas tecnológicas de tres portales de empleo, mira qué tecnologías pide cada una y las agrupa por empresa. Buscas por tecnología y provincia, y en vez de anuncios te salen empresas. Ahora hay más de 5.000.',
+        tustack_point_1: 'Dos APIs (Adzuna y Jooble) y un scraper detrás de una misma interfaz. Para añadir un portal nuevo basta con una clase.',
+        tustack_point_2: 'Colas con Redis y Horizon: cada noche sale un lote de jobs, uno por tecnología, y al terminar me llega un resumen por Telegram.',
+        tustack_point_3: 'Gemini para fusionar empresas duplicadas y completar su ficha. Antes, unas reglas locales descartan los casos claros, y cada respuesta se guarda para no pagarla dos veces.',
+        tustack_point_4: 'Búsqueda con Meilisearch, mapa, tendencias por tecnología y alertas por correo o Telegram. En tres idiomas y con unos 230 tests.',
+        studiio_summary: 'Un marketplace donde los artistas venden obra original sin intermediarios.',
+        studiio_desc: 'Es una demo, pero tiene lo que tendría un producto de verdad: pagos, suscripciones, panel de administración y una búsqueda que entiende lo que le pides.',
+        studiio_point_1: 'Stripe en todas partes: suscripciones de los artistas por niveles con Cashier y cobros repartidos con Stripe Connect.',
+        studiio_point_2: 'Búsqueda semántica. Cuando alguien sube una obra, un job en cola le pide a Gemini que la describa, genera el embedding y lo guarda en Pinecone. Puedes buscar «un mar oscuro y tormentoso» y la encuentra aunque el título no lo diga.',
+        studiio_point_3: 'Un asistente dentro del panel de administración que responde preguntas sobre la plataforma llamando a herramientas que consultan la base de datos.',
+        studiio_point_4: 'Exposiciones en 3D con Three.js para los artistas de la suscripción más alta.',
+        stalvi_kicker: 'También, para uso propio',
+        stalvi_desc: 'La app con la que controlo lo que gasto cada día. El backend es Laravel con Filament y expone una API REST que usa una app móvil hecha con Expo y React Native.',
+        stalvi_backend: 'Backend',
+        stalvi_mobile: 'App móvil',
         about_label: 'Sobre mí',
-        about_title: 'La persona detrás del código',
-        about_p1: 'Soy un desarrollador full stack con más de 8 años de experiencia construyendo aplicaciones web robustas y escalables. Trabajo en todo el stack—desde el diseño de bases de datos hasta interfaces front-end pulidas.',
-        about_p2: 'Mi día a día gira en torno al TALL stack (Tailwind, Alpine, Livewire, Laravel) y herramientas como Filament, Vue.js, Stripe y Meilisearch. Integro IA y automatización en mis flujos de trabajo para entregar soluciones más inteligentes y eficientes.',
-        about_p3: 'Me gusta trabajar en proyectos donde puedo ver la foto completa—entendiendo el porqué de lo que construyo, no solo el cómo.',
-        about_quote: 'El buen software parece obvio una vez que existe. Llegar ahí es la parte interesante.',
-        exp_label: 'Experiencia',
-        exp_title: 'Dónde he estado',
-        exp_1_role: 'Desarrollador Full Stack PHP',
-        exp_1_dates: 'Ago 2020 — Actualidad',
-        exp_1_company: 'Creagia',
-        exp_1_location: 'Igualada, Barcelona',
-        exp_1_desc: 'Construcción de aplicaciones web desde cero con PHP y Laravel. Trabajo diario con Filament, Livewire, Alpine.js, Vue.js, integración de pagos con Stripe, motores de búsqueda como Meilisearch y herramientas de IA.',
-        exp_2_role: 'Desarrollador Web',
-        exp_2_dates: 'Nov 2017 — Ago 2020',
-        exp_2_company: 'Instint Estratègies Digitals',
-        exp_2_location: 'Igualada, Barcelona',
-        exp_2_desc: 'Desarrollo de temas y plugins para WordPress y Prestashop. Front-end con CSS y Bootstrap. Gestión de contenidos para webs corporativas y de comercio electrónico.',
-        exp_3_role: 'Diseñador Web',
-        exp_3_dates: 'Oct 2014 — Mar 2015',
-        exp_3_company: 'Advisor Websites',
-        exp_3_location: 'Vancouver, Canadá',
-        exp_3_desc: 'Maquetaciones web a medida con LESS, CSS y jQuery.',
-        exp_4_role: 'Desarrollador Web (Prácticas)',
-        exp_4_dates: 'Jul 2014',
-        exp_4_company: 'Creagia',
-        exp_4_location: 'Igualada, Barcelona',
-        exp_4_desc: 'Desarrollo de una aplicación PHP y MySQL con el framework CodeIgniter.',
-        proj_label: 'Proyectos Seleccionados',
-        proj_title: 'Cosas que he construido',
-        proj_1_name: 'Proyecto Alpha',
-        proj_1_desc: 'Una plataforma SaaS para gestionar suscripciones y facturación con integración de Stripe.',
-        proj_2_name: 'Proyecto Beta',
-        proj_2_desc: 'Una app de reservas mobile-first con disponibilidad en tiempo real y procesamiento de pagos.',
-        proj_3_name: 'Proyecto Gamma',
-        proj_3_desc: 'Un panel de administración interno construido con Filament para gestionar logística e inventario.',
-        proj_view_github: 'Ver en GitHub',
-        stack_label: 'Stack y Herramientas',
-        stack_title: 'Con qué trabajo',
+        about_title: 'Sobre <em>mí</em>',
+        about_p1: 'Trabajo sobre todo con PHP y Laravel. Donde más disfruto es en la parte que no se ve: bases de datos, colas, integraciones con otros servicios e IA que hace trabajo de verdad, no solo de demo.',
+        about_p2: 'Fuera del trabajo: música, vinilos, cine, electrónica y viajes.',
+        about_quote: 'Hazlo o no lo hagas, pero no lo intentes.<cite>Maestro Yoda</cite>',
         stack_backend: 'Backend',
-        stack_frontend: 'Frontend',
-        stack_tools: 'Herramientas y Plataformas',
+        stack_frontend: 'Frontend y móvil',
+        stack_integrations: 'IA e integraciones',
         contact_label: 'Contacto',
-        contact_title: 'Hablemos',
+        contact_title: 'Contacto',
         contact_name: 'Nombre',
         contact_email: 'Correo electrónico',
         contact_message: 'Mensaje',
         contact_send: 'Enviar mensaje',
-        contact_social_intro: 'También puedes encontrarme en estas plataformas. Siempre estoy encantado de conectar.',
-        tagline_hero: 'Entender el porqué. Construir el cómo.',
-        tagline_about: 'Full stack con filo.',
-        tagline_contact: 'Apps web útiles, hechas con actitud.',
+        contact_social_intro: 'Si crees que puedo encajar en tu equipo o quieres comentar alguno de estos proyectos, escríbeme. El CV está en LinkedIn.',
         footer_text: '&copy; 2026 prodelpe.com'
       }
     };
@@ -2380,8 +2058,7 @@
       });
     });
 
-    const initialLang = detectInitialLang();
-    if (initialLang !== currentLang) applyLanguage(initialLang);
+    applyLanguage(detectInitialLang());
 
     /* ============================================
        SCROLL REVEAL — Intersection Observer
